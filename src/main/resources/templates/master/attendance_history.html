@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://thymeleaf.org">
+<head th:replace="~{master/common::head(title='勤務履歴')}">
+</head>
+<body>
+    <div th:replace="~{master/common::header}"></div>
+    <div class="contents">
+        <h2>テストユーザ の勤務履歴一覧 yyyy/MM/dd ~ yyyy/MM/dd</h2>
+        <table class="table">
+            <tr>
+                <th>日時</th>
+                <th>勤務開始時間</th>
+                <th>勤務終了時間</th>
+                <th>休憩時間</th>
+                <th>労働時間</th>
+            </tr>
+            <tr>
+                <td>yyyy/MM/dd</td>
+                <td>9:00</td>
+                <td>18:00</td>
+                <td>1:00</td>
+                <td>8:00</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

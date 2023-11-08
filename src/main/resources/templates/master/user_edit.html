@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://thymeleaf.org">
+<head th:replace="~{master/common::head(title='ユーザ編集')}">
+</head>
+<body>
+    <div th:replace="~{master/common::header}"></div>
+    <div class="contents">
+        <h2>ユーザ編集</h2>
+        <form th:action="@{'/master/user/update/' + ${user.id}}" method="POST">
+            <p>名前</p>
+            <input type="text" class="io-tag" name="name" th:value="${user.name}">
+            <p>ログインID</p>
+            <input type="text" class="io-tag" name="user_id" th:value="${user.user_id}">
+            <p>パスワード</p>
+            <input type="password" class="io-tag" name="password" th:value="${user.password}">
+            <p>
+                所属
+                <select>
+                    <option>開発部</option>
+                    <option>営業部</option>
+                    <option>人事部</option>
+                </select>
+            </p>
+            <p>
+                権限
+                <select name="role">
+                    <option value="0" th:selected="${user.role == 0}">一般</option>
+                    <option value="1" th:selected="${user.role == 1}">管理者</option>
+                </select>
+            </p>
+            <input type="submit" class="btn" value="更新">
+            <input type="button" onclick="deleteUser()" class="btn" value="削除">
+        </form>
+        <form name="delete_form" th:action="@{/master/user/delete}" method="POST">
+            <input type="hidden" name="id" th:value="${user.id}">
+        </form>
+    </div>
+<script>
+    function deleteUser()
+    {
+        let result = window.confirm('このユーザを削除しますか？');
+        if(result)
+        {
+            document.delete_form.submit();
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://thymeleaf.org">
+<head th:replace="~{master/common::head(title='勤務時間集計')}">
+</head>
+<body>
+    <div th:replace="~{master/common::header}"></div>
+    <div class="contents">
+        <h2>勤務時間集計一覧 yyyy年mm月</h2>
+        <table class="table">
+            <tr>
+                <th>氏名</th>
+                <th>勤務時間</th>
+            </tr>
+            <tr>
+                <td><a href="@{/master/history}">テストユーザ</a></td>
+                <td>55:00</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

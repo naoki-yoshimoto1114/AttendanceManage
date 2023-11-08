@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://thymeleaf.org">
+<head th:replace="~{user/common::head(title='勤務状況')}">
+</head>
+<body onload="showDate()">
+    <div th:replace="~{user/common::header}"></div>
+    <div class="contents">
+        <h2><span id="today"></span>の勤務状況</h2>
+        <table class="table">
+            <tr>
+                <th>氏名</th>
+                <th>勤務開始時間</th>
+                <th>勤務終了時間</th>
+                <th>勤務場所</th>
+                <th>ステータス</th>
+            </tr>
+            <tr>
+                <td>テストユーザ</td>
+                <td>9:00</td>
+                <td>18:00</td>
+                <td>自宅</td>
+                <td>出勤中</td>
+            </tr>
+            <tr>
+                <td>テストユーザ2</td>
+                <td>9:00</td>
+                <td>18:00</td>
+                <td>自宅</td>
+                <td>出勤中</td>
+            </tr>
+            <tr>
+                <td>テストユーザ3</td>
+                <td>9:00</td>
+                <td>18:00</td>
+                <td>自宅</td>
+                <td>出勤中</td>
+            </tr>
+            <tr th:each="attendance : ${attendances}">
+                <td th:text="${attendance.user_id}"></td>
+                <td th:text="${attendance.begin_time}"></td>
+                <td th:text="${attendance.end_time != null}? ${attendance.end_time} : '--:--'"></td>
+                <td th:text="${attendance.place != null}? ${attendance.place} : '-'"></td>
+                <td th:text="${attendance.status}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

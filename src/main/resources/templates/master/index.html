@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://thymeleaf.org">
+<head th:replace="~{master/common::head(title='ユーザ管理')}">
+</head>
+<body>
+    <div th:replace="~{master/common::header}"></div>
+    <div class="contents">
+        <h2>ユーザ一覧</h2>
+        <button type="button" class="btn" onclick="location.href='/master/user/add'">新規登録</button>
+        <table class="table">
+            <tr>
+                <th>ログインID</th>
+                <th>氏名</th>
+                <th>権限</th>
+            </tr>
+            <tr>
+                <td>00001</td>
+                <td><a href="/master/user/edit">テストユーザ</a></td>
+                <td>管理者</td>
+            </tr>
+            <tr>
+                <td>00002</td>
+                <td><a href="/master/user/edit">テストユーザ2</a></td>
+                <td>一般</td>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.user_id}"></td>
+                <td><a th:href="@{'user/edit/'+${user.id}}" th:text="${user.name}"></a></td>
+                <td th:text="${user.role}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

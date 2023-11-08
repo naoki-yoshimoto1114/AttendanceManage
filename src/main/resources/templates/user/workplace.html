@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://thymeleaf.org">
+<head th:replace="~{user/common::head(title='勤務場所登録')}">
+</head>
+<body>
+    <div th:replace="~{user/common::header}"></div>
+    <div class="contents">
+        <h2>勤務場所登録</h2>
+        <p>本日の勤務場所を登録してください。</p>
+        <form th:action="@{/view}" method="POST">
+            <select name="place" class="io-tag">
+                <option value="自宅">自宅</option>
+                <option value="本社">本社</option>
+                <option value="営業所">営業所</option>
+            </select>
+            <input type="submit" class="btn" value="登録">
+        </form>
+    </div>
+</body>
+</html>

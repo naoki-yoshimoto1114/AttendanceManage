@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://thymeleaf.org">
+<head th:replace="~{user/common::head(title='勤怠履歴')}">
+</head>
+<body>
+    <div th:replace="~{user/common::header}"></div>
+    <div class="contents">
+        <h2>勤怠履歴</h2>
+        <table class="table">
+            <tr>
+                <th>日付</th>
+                <th>開始</th>
+                <th>終了</th>
+                <th>休憩</th>
+                <th>総労働時間</th>
+            </tr>
+            <tr>
+                <td>2023/01/01</td>
+                <td>9:00</td>
+                <td>18:00</td>
+                <td>1:00</td>
+                <td>8:00</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
