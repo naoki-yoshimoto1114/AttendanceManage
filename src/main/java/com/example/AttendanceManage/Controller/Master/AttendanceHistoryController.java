@@ -10,5 +10,4 @@ public class AttendanceHistoryController {
     {
         return "master/attendance_history";
     }
-    // testgit
 }
