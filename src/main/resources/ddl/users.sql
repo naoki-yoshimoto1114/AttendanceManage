@@ -14,6 +14,7 @@
 
 -- users
 -- * RestoreFromTempTable
+-- テーブル作成
 create table users (
   id serial not null
   , user_id character varying(5) not null
@@ -23,7 +24,7 @@ create table users (
   , tel character varying(256)
   , remarks text
   , role smallint default 0
-  , constraint users_PKC primary key (id)
+  , primary key (id)
 ) ;
 
 comment on table users is 'users';

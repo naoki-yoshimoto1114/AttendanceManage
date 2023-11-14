@@ -14,6 +14,7 @@
 
 -- attendances
 -- * RestoreFromTempTable
+-- テーブル作成
 create table attendances (
   attendance_id serial not null
   , user_id character varying(5) not null
@@ -24,7 +25,7 @@ create table attendances (
   , place character varying(40)
   , date date
   , status smallint
-  , constraint attendances_PKC primary key (attendance_id)
+  , primary key (attendance_id)
 ) ;
 
 comment on table attendances is 'attendances';
