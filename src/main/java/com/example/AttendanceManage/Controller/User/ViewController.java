@@ -32,13 +32,21 @@ public class ViewController {
     public String updatePlace(@RequestParam("place") String place)
     {
         String user_id = "00000";
+        Date now = new Date();
+
+        SimpleDateFormat sdfTime = new SimpleDateFormat("H:m:s");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy/MM/dd");
+
+        String begin_time = sdfTime.format(now);
+        String date = sdfDate.format(now);
 
         // 新規登録処理
-        String sql = "UPDATE attendances SET place = ? WHERE user_id = ?";
+        String sql = "INSERT INTO attendances (user_id, begin_time, end_time, rest_start, rest_end, place, date, status)" +
+                " VALUES(?, ?::time, ?, ?, ?, ?, ?::date, ?)";
 
         try
         {
-            jdbcTemplate.update(sql, place, user_id);
+            jdbcTemplate.update(sql, user_id, begin_time, null, null, null, place, date, 1);
         }
         catch (Exception e)
         {
