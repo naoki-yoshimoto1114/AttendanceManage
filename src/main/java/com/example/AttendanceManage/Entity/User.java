@@ -35,5 +35,5 @@ public class User {
     private String remarks;
 
     @Column
-    private int role;
+    private String role;
 }

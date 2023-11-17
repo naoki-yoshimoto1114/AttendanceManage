@@ -33,7 +33,7 @@ public class UserRepository {
             user.setPassword((String) map.get("password"));
             user.setTel((String) map.get("tel"));
             user.setRemarks((String) map.get("remarks"));
-            user.setRole((int) map.get("role"));
+            user.setRole((String) map.get("role"));
 
             list.add(user);
         }
@@ -67,7 +67,7 @@ public class UserRepository {
         user.setPassword((String) resultMap.get("password"));
         user.setTel((String) resultMap.get("tel"));
         user.setRemarks((String) resultMap.get("remarks"));
-        user.setRole((int) resultMap.get("role"));
+        user.setRole((String) resultMap.get("role"));
 
         return user;
     }
