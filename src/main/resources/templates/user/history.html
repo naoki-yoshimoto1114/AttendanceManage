@@ -21,6 +21,13 @@
                 <td>1:00</td>
                 <td>8:00</td>
             </tr>
+            <tr th:each="attendance : ${attendances}">
+                <td th:text="${attendance.user_id}"></td>
+                <td th:text="${attendance.begin_time}"></td>
+                <td th:text="${attendance.end_time != null}? ${attendance.end_time} : '--:--'"></td>
+                <td th:text="${attendance.rest_start != null} || ${attendance.rest_end != null}? ${attendance.rest_start} - ${attendance.rest_end} : '00:00'"></td>
+                <td th:text="${attendance.place}"></td><!--総労働時間の表示-->
+            </tr>
         </table>
     </div>
 </body>
