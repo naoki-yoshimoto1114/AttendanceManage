@@ -6,7 +6,7 @@
     <div th:replace="~{user/common::header}"></div>
     <div class="contents">
         <h2>出退勤登録</h2>
-        <p>〇〇さんの出勤状態:未出勤or出勤中or休憩中</p>
+        <p th:text="'〇〇さんの出勤状態:' + ${status}"></p>
         <p>現在時刻:<span id="clock-time"></span></p>
         <form th:action="@{/workplace}" name="attendance_form" method="POST">
             <div class="menu-btn">
