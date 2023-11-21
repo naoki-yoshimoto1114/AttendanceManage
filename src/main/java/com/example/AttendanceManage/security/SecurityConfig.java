@@ -26,7 +26,10 @@ public class SecurityConfig
                         login -> login
                                 .loginPage("/login")
                                 .usernameParameter("userId")
-                                .defaultSuccessUrl("/"));
+                                .defaultSuccessUrl("/"))
+                .logout(
+                        logout -> logout
+                                .logoutSuccessUrl("/login"));
         return http.build();
     }
 
