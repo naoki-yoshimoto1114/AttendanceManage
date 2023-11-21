@@ -84,7 +84,7 @@ class UsersControllerTest {
         user.setUserId("00010");
         user.setName("test user");
         user.setPassword("testPassword");
-        user.setRole("ROLE_USER");
+        user.setRole("USER");
         return user;
     }
 
