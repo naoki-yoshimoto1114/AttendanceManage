@@ -25,7 +25,7 @@ public class SecurityConfig
                 .formLogin(
                         login -> login
                                 .loginPage("/login")
-                                .usernameParameter("user_id")
+                                .usernameParameter("userId")
                                 .defaultSuccessUrl("/"));
         return http.build();
     }

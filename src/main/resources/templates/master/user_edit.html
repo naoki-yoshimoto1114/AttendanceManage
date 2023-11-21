@@ -10,7 +10,7 @@
             <p>名前</p>
             <input type="text" class="io-tag" name="name" th:value="${user.name}">
             <p>ログインID</p>
-            <input type="text" class="io-tag" name="user_id" th:value="${user.user_id}">
+            <input type="text" class="io-tag" name="userId" th:value="${user.userId}">
             <p>パスワード</p>
             <input type="password" class="io-tag" name="password" th:value="${user.password}">
             <p>
@@ -24,8 +24,8 @@
             <p>
                 権限
                 <select name="role">
-                    <option value="0" th:selected="${user.role == 0}">一般</option>
-                    <option value="1" th:selected="${user.role == 1}">管理者</option>
+                    <option value="ROLE_USER" th:selected="${user.role == 'ROLE_USER'}">一般</option>
+                    <option value="ROLE_ADMIN" th:selected="${user.role == 'ROLE_ADMIN'}">管理者</option>
                 </select>
             </p>
             <input type="submit" class="btn" value="更新">

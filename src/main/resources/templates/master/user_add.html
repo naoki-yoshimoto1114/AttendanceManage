@@ -10,7 +10,7 @@
             <p>名前</p>
             <input type="text" name="name" class="io-tag">
             <p>ログインID</p>
-            <input type="text" name="user_id" class="io-tag">
+            <input type="text" name="userId" class="io-tag">
             <p>パスワード</p>
             <input type="password" name="password" class="io-tag">
             <p>
@@ -24,8 +24,8 @@
             <p>
                 権限
                 <select name="role">
-                    <option value="0">一般</option>
-                    <option value="1">管理者</option>
+                    <option value="ROLE_USER">一般</option>
+                    <option value="ROLE_ADMIN">管理者</option>
                 </select>
             </p>
             <p><input type="submit" class="btn login-btn" value="新規登録"></p>
