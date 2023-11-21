@@ -15,7 +15,9 @@ import java.util.Optional;
 public class UsersController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
     private UserCrudRepository userCrudRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
 
