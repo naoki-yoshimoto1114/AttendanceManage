@@ -4,6 +4,7 @@ import com.example.AttendanceManage.Entity.User;
 import com.example.AttendanceManage.repositories.UserCrudRepository;
 import com.example.AttendanceManage.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +14,10 @@ import java.util.Optional;
 @Controller
 public class UsersController {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    private UserCrudRepository userCrudRepository;
+    private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    UserCrudRepository userCrudRepository;
 
     @RequestMapping("master/users")
     private String index(Model model)
@@ -34,6 +35,8 @@ public class UsersController {
     @PostMapping("master/user/create")
     private String create(@ModelAttribute User user)
     {
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
         userCrudRepository.save(user);
         return "redirect:/master/users";
     }
