@@ -21,6 +21,7 @@ public class SecurityConfig
                         authorize -> authorize
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                 .requestMatchers("/login").permitAll()
+                                .requestMatchers("/master/**").hasRole("ADMIN")
                                 .anyRequest().authenticated())
                 .formLogin(
                         login -> login
