@@ -27,10 +27,4 @@ public class LoginController {
         model.addAttribute("errorMsg", errorInfo.getMessage());
         return "login";
     }
-
-//    @PostMapping("login")
-//    public String login()
-//    {
-//        return "redirect:/";
-//    }
 }

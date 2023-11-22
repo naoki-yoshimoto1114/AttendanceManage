@@ -13,7 +13,7 @@
     </header>
     <div class="contents">
         <h2>ログイン</h2>
-        <span th:text="${errorMsg}"></span>
+        <div class="errorMsg" th:text="${errorMsg}"></div>
         <form th:action="@{/login}" method="POST">
             <p>ユーザID</p>
             <input type="text" name="userId" class="io-tag">
