@@ -43,6 +43,7 @@ public class UsersController {
         return "redirect:/master/users";
     }
 
+//    TODO:DBから取得したパスワードをデコードする。
     @GetMapping("master/user/edit/{id}")
     private String edit(@PathVariable Integer id, Model model)
     {
@@ -54,6 +55,7 @@ public class UsersController {
         return "master/user_edit";
     }
 
+//    TODO:パスワードをエンコードして登録する。
     @PostMapping("master/user/update/{id}")
     private String update(@ModelAttribute User user)
     {
