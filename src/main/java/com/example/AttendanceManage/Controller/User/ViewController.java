@@ -46,7 +46,7 @@ public class ViewController {
 
         try
         {
-            jdbcTemplate.update(sql, user_id, begin_time, null, null, null, place, date, 1);
+            jdbcTemplate.update(sql, user_id, begin_time, null, null, null, place, date, "勤務中");
         }
         catch (Exception e)
         {
