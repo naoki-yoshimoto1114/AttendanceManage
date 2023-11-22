@@ -36,7 +36,7 @@ public class Attendance {
     private LocalDate date;
 
     @Column
-    private int status;
+    private String status;
 
     public int getAttendance_id() {
         return attendance_id;
@@ -102,11 +102,11 @@ public class Attendance {
         this.date = date;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

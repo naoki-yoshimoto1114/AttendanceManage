@@ -17,11 +17,7 @@ public class IndexController {
     public String index(Model model)
     {
         Optional<Attendance> data = repository.findById(1);
-        Attendance attendance = data.get();
-        Integer status = attendance.getStatus();
-        Status st = new Status();
-        String msg = st.getStatusName(status);
-        model.addAttribute("status", msg);
+        model.addAttribute("data", data.get());
         return "user/index";
     }
 }

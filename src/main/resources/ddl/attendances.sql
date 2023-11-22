@@ -23,7 +23,7 @@ create table attendances (
   , rest_end time without time zone
   , place character varying(40)
   , date date
-  , status smallint
+  , status character varying(20)
   , constraint attendances_PKC primary key (attendance_id)
 ) ;
 
