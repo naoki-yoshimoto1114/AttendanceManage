@@ -1,5 +1,6 @@
 package com.example.AttendanceManage.Controller.User;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,11 @@ public class IndexController {
     @Autowired
     AttendanceCrudRepository repository;
     @RequestMapping("/")
-    public String index(@AuthenticationPrincipal User user, Model model)
+    public String index(@AuthenticationPrincipal User user, Model model, HttpSession session)
     {
         boolean hasRoleAdmin = user.getAuthorities().stream()
                 .allMatch(authority -> authority.getAuthority().equals("ADMIN"));
+        session.setAttribute("hasRoleAdmin", hasRoleAdmin);
         model.addAttribute("hasRoleAdmin", hasRoleAdmin);
 
         Optional<Attendance> data = repository.findById(3);
