@@ -24,27 +24,6 @@ public class WorkPlaceController {
     @PostMapping("workplace")
     public String insertAttendance()
     {
-        String user_id = "00000";
-        Date now = new Date();
-
-        SimpleDateFormat sdfTime = new SimpleDateFormat("H:m:s");
-        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy/MM/dd");
-
-        String begin_time = sdfTime.format(now);
-        String date = sdfDate.format(now);
-
-        // 新規登録処理
-        String sql = "INSERT INTO attendances (user_id, begin_time, end_time, rest_start, rest_end, place, date, status)" +
-                " VALUES(?, ?::time, ?, ?, ?, ?, ?::date, ?)";
-
-        try
-        {
-            jdbcTemplate.update(sql, user_id, begin_time, null, null, null, null, date, 1);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
         return "redirect:/workplace";
     }
 }
