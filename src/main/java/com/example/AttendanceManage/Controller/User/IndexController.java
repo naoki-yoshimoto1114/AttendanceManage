@@ -16,8 +16,19 @@ public class IndexController {
     @RequestMapping("/")
     public String index(Model model)
     {
-        Optional<Attendance> data = repository.findById(1);
+        Optional<Attendance> data = repository.findById(3);
         model.addAttribute("data", data.get());
+        Attendance attendance = data.get();
+        String status = attendance.getStatus();
+        if(status.equals("勤務中")){
+            model.addAttribute("msg1", "休憩開始");
+            model.addAttribute("msg2", "退勤");
+            model.addAttribute("action", "/workplace");
+        }else{
+            model.addAttribute("msg1", "出勤");
+            model.addAttribute("msg2", "退勤");
+            model.addAttribute("action", "/workplace");
+        }
         return "user/index";
     }
 }
