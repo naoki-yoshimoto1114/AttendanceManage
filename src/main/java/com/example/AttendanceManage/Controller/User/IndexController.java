@@ -21,7 +21,6 @@ public class IndexController {
         boolean hasRoleAdmin = user.getAuthorities().stream()
                 .allMatch(authority -> authority.getAuthority().equals("ADMIN"));
         session.setAttribute("hasRoleAdmin", hasRoleAdmin);
-        model.addAttribute("hasRoleAdmin", hasRoleAdmin);
 
         Optional<Attendance> data = repository.findById(3);
         model.addAttribute("data", data.get());
