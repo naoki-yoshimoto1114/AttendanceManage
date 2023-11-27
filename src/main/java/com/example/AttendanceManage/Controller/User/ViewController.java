@@ -1,5 +1,6 @@
 package com.example.AttendanceManage.Controller.User;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import java.util.Map;
 public class ViewController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private HttpSession session;
 
     @GetMapping("view")
     public String index(Model model)
@@ -47,6 +50,7 @@ public class ViewController {
         try
         {
             jdbcTemplate.update(sql, user_id, begin_time, null, null, null, place, date, "勤務中");
+            session.setAttribute("status", "勤務中");
         }
         catch (Exception e)
         {
