@@ -1,9 +1,12 @@
 package com.example.AttendanceManage.Entity;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 
 @Entity
@@ -29,6 +32,12 @@ public class Attendance {
     @Column
     private LocalTime rest_end;
 
+    @Column
+    private LocalTime working_time;
+
+    @Column
+    private LocalTime rest_time;
+
     @Column(length = 50, nullable = true)
     private String place;
 
@@ -37,6 +46,26 @@ public class Attendance {
 
     @Column
     private int status;
+
+    public Attendance(){
+
+    }
+
+    public LocalTime getWorking_time() {
+        return working_time;
+    }
+
+    public void setWorking_time(LocalTime working_time) {
+        this.working_time = working_time;
+    }
+
+    public LocalTime getRest_time() {
+        return rest_time;
+    }
+
+    public void setRest_time(LocalTime rest_time) {
+        this.rest_time = rest_time;
+    }
 
     public int getAttendance_id() {
         return attendance_id;
@@ -108,5 +137,37 @@ public class Attendance {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    /* 確認用
+    public String toString(){
+        return "user_id:" + getUser_id() +
+                ", begin_time:" + getBegin_time() +
+                ", end_time:" + getEnd_time() +
+                ", rest_start:" + getRest_start() +
+                ", rest_end:" + getRest_end() +
+                ", place:" + getPlace() +
+                ", date:" + getDate() +
+                ", status:" + getStatus();
+        //休憩時間, 勤務時間は現在未設定
+    }
+
+     */
+
+    public void calcRestTime() {
+        Duration duration = Duration.between(rest_start, rest_end);
+        LocalTime lt = LocalTime.MIDNIGHT.plus(duration); //表示形式変更
+        setRest_time(lt);
+    }
+
+
+    public void calcWorkingTime() {
+        Duration duration = Duration.between(begin_time, end_time);
+        if(rest_time != null) {
+            duration = duration.minus(Duration.between(rest_start, rest_end));
+        }
+        LocalTime lt = LocalTime.MIDNIGHT.plus(duration);
+
+        setWorking_time(lt);
     }
 }

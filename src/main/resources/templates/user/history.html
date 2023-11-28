@@ -14,19 +14,13 @@
                 <th>休憩</th>
                 <th>総労働時間</th>
             </tr>
-            <tr>
-                <td>2023/01/01</td>
-                <td>9:00</td>
-                <td>18:00</td>
-                <td>1:00</td>
-                <td>8:00</td>
-            </tr>
             <tr th:each="attendance : ${data}">
-                <td th:text="${attendance.date}"></td>
+                <td th:text="${#temporals.format(attendance.date, 'yyyy/MM/dd')}"></td>
                 <td th:text="${attendance.begin_time}"></td>
                 <td th:text="${attendance.end_time != null}? ${attendance.end_time} : '--:--'"></td>
-                <td th:text="${attendance.rest_end}"></td><!--休憩時間の表示-->
-                <td th:text="${attendance.place}"></td><!--総労働時間の表示-->
+                <td th:text="${attendance.rest_time != null} ? ${attendance.rest_time} : '--:--'"></td>
+                <td th:text="${attendance.working_time != null} ? ${attendance.working_time} : '--:--'">
+
             </tr>
         </table>
     </div>

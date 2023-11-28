@@ -19,7 +19,23 @@ public class HistoryController {
     @GetMapping("history")
     public String index(Model model){
         List<Attendance> list = repository.findAll();
+
+        for(Attendance a: list){
+            //既にデータがある場合の判定処理を加える
+
+
+            if(a.getRest_start() != null && a.getRest_end() != null){
+                a.calcRestTime(); //休憩時間の算出
+            }
+            if(a.getBegin_time() != null && a.getEnd_time() != null){
+                a.calcWorkingTime(); //労働時間の算出
+            }
+        }
+
+        //登録処理?
+
         model.addAttribute("data", list);
+
         return "user/history";
     }
 }
