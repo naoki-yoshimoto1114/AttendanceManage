@@ -25,6 +25,8 @@ create table attendances (
   , place character varying(40)
   , date date
   , status character varying(256)
+  , rest_time time without time zone
+  , working_time time without time zone
   , primary key (attendance_id)
 ) ;
 
