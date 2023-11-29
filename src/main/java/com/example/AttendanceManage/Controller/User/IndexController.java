@@ -18,11 +18,13 @@ public class IndexController {
     @RequestMapping("/")
     public String index(@AuthenticationPrincipal User user, Model model, HttpSession session)
     {
+        // 管理者or一般
         boolean hasRoleAdmin = user.getAuthorities().stream()
                 .allMatch(authority -> authority.getAuthority().equals("ADMIN"));
         session.setAttribute("hasRoleAdmin", hasRoleAdmin);
 
-        Optional<Attendance> data = repository.findById(3);
+        // TODO:ログインしたユーザIDで取得
+        Optional<Attendance> data = repository.findById(1);
         model.addAttribute("data", data.get());
         Attendance attendance = data.get();
         String status = attendance.getStatus();

@@ -24,10 +24,10 @@ public class HistoryController {
             //既にデータがある場合の判定処理を加える
 
 
-            if(a.getRest_start() != null && a.getRest_end() != null){
+            if(a.getRestStart() != null && a.getRestEnd() != null){
                 a.calcRestTime(); //休憩時間の算出
             }
-            if(a.getBegin_time() != null && a.getEnd_time() != null){
+            if(a.getBeginTime() != null && a.getEndTime() != null){
                 a.calcWorkingTime(); //労働時間の算出
             }
         }
