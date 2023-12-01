@@ -54,10 +54,11 @@ public class UsersController {
         return "master/user_edit";
     }
 
-//    TODO:パスワードをエンコードして登録する。
     @PostMapping("master/user/update/{id}")
     private String update(@ModelAttribute User user)
     {
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
         userRepository.update(user);
         return "redirect:/master/users";
     }
