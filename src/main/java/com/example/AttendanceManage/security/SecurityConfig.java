@@ -40,7 +40,7 @@ public class SecurityConfig
                         login -> login
                                 .loginPage("/login")
                                 .usernameParameter("userId")
-                                .defaultSuccessUrl("/"))
+                                .successForwardUrl("/"))
                 .logout(
                         logout -> logout
                                 .logoutSuccessUrl("/login"));
