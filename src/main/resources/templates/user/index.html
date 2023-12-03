@@ -8,11 +8,11 @@
         <h2>出退勤登録</h2>
         <p th:text="'〇〇さんの出勤状態:' + ${status}"></p>
         <p>現在時刻:<span id="clock-time"></span></p>
-        <form th:action="${action}" method="POST">
+        <form method="GET">
             <div class="menu-btn">
                 <ul class="menu-list">
-                    <li><input type="submit" class="btn home-btn" name="attendance_btn" th:value="${msg1}"></li>
-                    <li><input type="button" class="btn home-btn" name="attendance_btn" th:value="${msg2}"></li>
+                    <li><input type="submit" class="btn home-btn" name="btn1" th:value="${msg1}" th:formaction="${action}"></li>
+                    <li><input type="submit" class="btn home-btn" name="btn2" th:value="${msg2}"></li>
                 </ul>
             </div>
         </form>

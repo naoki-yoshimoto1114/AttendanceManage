@@ -46,11 +46,15 @@ public class ViewController {
         // 新規登録処理
         String sql = "INSERT INTO attendances (user_id, begin_time, end_time, rest_start, rest_end, place, date, status)" +
                 " VALUES(?, ?::time, ?, ?, ?, ?, ?::date, ?)";
+        // attendance_id取得
+        String id = "SELECT MAX(attendance_id) from attendances";
 
         try
         {
             jdbcTemplate.update(sql, user_id, begin_time, null, null, null, place, date, "勤務中");
+            Integer attendance_id = jdbcTemplate.queryForObject(id, Integer.class);
             session.setAttribute("status", "勤務中");
+            session.setAttribute("attendance_id", attendance_id);
         }
         catch (Exception e)
         {
