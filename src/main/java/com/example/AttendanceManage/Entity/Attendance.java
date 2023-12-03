@@ -1,35 +1,46 @@
 package com.example.AttendanceManage.Entity;
 
 import jakarta.persistence.*;
-
+import lombok.*;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
+@Data
 @Entity
 @Table(name = "attendances")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Attendance {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "attendance_id")
+    private int attendanceId;
+
+    @Column(name = "user_id")
+    private String userId;
+
+    @Column(name = "begin_time")
+    private LocalTime beginTime;
+
+    @Column(name = "end_time")
+    private LocalTime endTime;
+
+    @Column(name = "rest_start")
+    private LocalTime restStart;
+
+    @Column(name = "rest_end")
+    private LocalTime restEnd;
+
+    @Column(name = "working_time")
+    private LocalTime workingTime;
+
+    @Column(name = "rest_time")
+    private LocalTime restTime;
+
     @Column
-    private int attendance_id;
-
-    @Column(length = 5, nullable = false)
-    private String user_id;
-
-    @Column
-    private LocalTime begin_time;
-
-    @Column
-    private LocalTime end_time;
-
-    @Column
-    private LocalTime rest_start;
-
-    @Column
-    private LocalTime rest_end;
-
-    @Column(length = 50, nullable = true)
     private String place;
 
     @Column
@@ -38,75 +49,20 @@ public class Attendance {
     @Column
     private String status;
 
-    public int getAttendance_id() {
-        return attendance_id;
+    public void calcRestTime() {
+        Duration duration = Duration.between(restStart, restEnd);
+        LocalTime lt = LocalTime.MIDNIGHT.plus(duration); //表示形式変更
+        setRestTime(lt);
     }
 
-    public void setAttendance_id(int attendance_id) {
-        this.attendance_id = attendance_id;
-    }
 
-    public String getUser_id() {
-        return user_id;
-    }
+    public void calcWorkingTime() {
+        Duration duration = Duration.between(beginTime, endTime);
+        if(restTime != null) {
+            duration = duration.minus(Duration.between(restStart, restEnd));
+        }
+        LocalTime lt = LocalTime.MIDNIGHT.plus(duration);
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-
-    public LocalTime getBegin_time() {
-        return begin_time;
-    }
-
-    public void setBegin_time(LocalTime begin_time) {
-        this.begin_time = begin_time;
-    }
-
-    public LocalTime getEnd_time() {
-        return end_time;
-    }
-
-    public void setEnd_time(LocalTime end_time) {
-        this.end_time = end_time;
-    }
-
-    public LocalTime getRest_start() {
-        return rest_start;
-    }
-
-    public void setRest_start(LocalTime rest_start) {
-        this.rest_start = rest_start;
-    }
-
-    public LocalTime getRest_end() {
-        return rest_end;
-    }
-
-    public void setRest_end(LocalTime rest_end) {
-        this.rest_end = rest_end;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+        setWorkingTime(lt);
     }
 }
