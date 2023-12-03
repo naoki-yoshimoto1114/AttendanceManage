@@ -6,15 +6,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import com.example.AttendanceManage.Entity.Attendance;
 import com.example.AttendanceManage.repositories.AttendanceCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Optional;
 
 @Controller
 public class IndexController {
@@ -26,11 +23,16 @@ public class IndexController {
     private JdbcTemplate jdbcTemplate;
 
     @RequestMapping("/")
-    public String index(@AuthenticationPrincipal User user, Model model)
+    public String index(@AuthenticationPrincipal User user, Model model, HttpSession session)
     {
         String status = (String) session.getAttribute("status");
         boolean rest_flag = (boolean) session.getAttribute("restEnd");
         model.addAttribute("status", status);
+        // 管理者or一般
+        boolean hasRoleAdmin = user.getAuthorities().stream()
+                .allMatch(authority -> authority.getAuthority().equals("ADMIN"));
+        session.setAttribute("hasRoleAdmin", hasRoleAdmin);
+
         if(status.equals("勤務中")){
             if(rest_flag){
                 model.addAttribute("msg1", "退勤");
