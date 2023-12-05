@@ -16,7 +16,6 @@
                 <th>勤務場所</th>
                 <th>ステータス</th>
             </tr>
-
             <tr th:each="attendance : ${attendances}">
                 <td th:text="${attendance.user_id}"></td>
                 <td th:text="${attendance.begin_time}"></td>
