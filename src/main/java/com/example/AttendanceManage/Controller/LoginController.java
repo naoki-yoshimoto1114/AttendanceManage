@@ -19,7 +19,6 @@ public class LoginController {
     {
         String status = "未出勤";
         session.setAttribute("status", status);
-        session.setAttribute("restEnd", false);
         return "login";
     }
 

@@ -34,7 +34,9 @@ public class ViewController {
     @PostMapping("view")
     public String updatePlace(@RequestParam("place") String place)
     {
-        String user_id = "00000";
+//        String user_id = "00000";
+        String user_id = (String) session.getAttribute("userId");
+
         Date now = new Date();
 
         SimpleDateFormat sdfTime = new SimpleDateFormat("H:m:s");
