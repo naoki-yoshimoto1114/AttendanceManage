@@ -42,7 +42,9 @@ public class ViewController {
     @PostMapping("view")
     public String updatePlace(@RequestParam("place") String place)
     {
-        String user_id = "00000";
+//        String user_id = "00000";
+        String user_id = (String) session.getAttribute("userId");
+
         Date now = new Date();
 
         SimpleDateFormat sdfTime = new SimpleDateFormat("H:m:s");
@@ -61,7 +63,7 @@ public class ViewController {
         {
             jdbcTemplate.update(sql, user_id, begin_time, null, null, null, place, date, "勤務中");
             Integer attendance_id = jdbcTemplate.queryForObject(id, Integer.class);
-            session.setAttribute("status", "勤務中");
+            session.setAttribute("status", "勤務中1");
             session.setAttribute("attendance_id", attendance_id);
         }
         catch (Exception e)
