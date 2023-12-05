@@ -26,7 +26,6 @@ public class IndexController {
     public String index(@AuthenticationPrincipal User user, Model model, HttpSession session)
     {
         String status = (String) session.getAttribute("status");
-        boolean rest_flag = (boolean) session.getAttribute("restEnd");
         model.addAttribute("status", status);
         // 管理者or一般
         boolean hasRoleAdmin = user.getAuthorities().stream()
