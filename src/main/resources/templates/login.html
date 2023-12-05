@@ -16,7 +16,7 @@
         <div class="errorMsg" th:text="${errorMsg}"></div>
         <form th:action="@{/login}" method="POST">
             <p>ユーザID</p>
-            <input type="text" name="userId" class="io-tag">
+            <input type="text" name="userId" th:value="${userId}" class="io-tag">
             <p>パスワード</p>
             <input type="password" name="password" class="io-tag">
             <p><input type="submit" class="btn login-btn" value="ログイン"></p>

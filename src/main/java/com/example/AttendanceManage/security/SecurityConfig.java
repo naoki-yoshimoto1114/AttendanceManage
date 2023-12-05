@@ -1,6 +1,8 @@
 package com.example.AttendanceManage.security;
 
+import com.example.AttendanceManage.handler.FailureHandler;
 import com.example.AttendanceManage.handler.SuccessHandler;
+import com.sun.net.httpserver.Authenticator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -30,6 +32,9 @@ public class SecurityConfig
     @Autowired
     private SuccessHandler successHandler;
 
+    @Autowired
+    private FailureHandler failureHandler;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
@@ -44,7 +49,8 @@ public class SecurityConfig
                         login -> login
                                 .loginPage("/login")
                                 .usernameParameter("userId")
-                                .successHandler(successHandler))
+                                .successHandler(successHandler)
+                                .failureHandler(failureHandler))
                 .logout(
                         logout -> logout
                                 .logoutSuccessUrl("/login"));
