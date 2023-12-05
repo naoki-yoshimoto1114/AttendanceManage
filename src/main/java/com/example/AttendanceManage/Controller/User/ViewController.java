@@ -53,7 +53,7 @@ public class ViewController {
         {
             jdbcTemplate.update(sql, user_id, begin_time, null, null, null, place, date, "勤務中");
             Integer attendance_id = jdbcTemplate.queryForObject(id, Integer.class);
-            session.setAttribute("status", "勤務中");
+            session.setAttribute("status", "勤務中1");
             session.setAttribute("attendance_id", attendance_id);
         }
         catch (Exception e)
