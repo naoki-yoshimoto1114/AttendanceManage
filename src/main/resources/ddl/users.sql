@@ -24,6 +24,7 @@ create table users (
   , tel character varying(256)
   , remarks text
   , role character varying(255)
+  , department character varying(40)
   , primary key (id)
 ) ;
 
@@ -35,5 +36,6 @@ comment on column users.email is 'email';
 comment on column users.password is 'password';
 comment on column users.tel is 'tel';
 comment on column users.remarks is 'remarks';
+comment on column users.department is 'department';
 comment on column users.role is 'role:USER:一般 ADMIN:管理者';
 

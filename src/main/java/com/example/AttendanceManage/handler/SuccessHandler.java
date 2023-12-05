@@ -35,6 +35,7 @@ public class SuccessHandler implements AuthenticationSuccessHandler
         session.setAttribute("userId", loginUser.get().getUserId());
         session.setAttribute("id", loginUser.get().getId());
         session.setAttribute("name", loginUser.get().getName());
+        session.setAttribute("department", loginUser.get().getDepartment());
 
         response.sendRedirect("/");
     }
