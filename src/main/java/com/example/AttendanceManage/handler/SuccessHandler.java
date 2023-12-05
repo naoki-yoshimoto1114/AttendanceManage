@@ -32,7 +32,8 @@ public class SuccessHandler implements AuthenticationSuccessHandler
 
         Optional<User> loginUser = userCrudRepository.findByUserId(userId);
 
-        session.setAttribute("userId", loginUser.get().getId());
+        session.setAttribute("userId", loginUser.get().getUserId());
+        session.setAttribute("id", loginUser.get().getId());
         session.setAttribute("name", loginUser.get().getName());
 
         response.sendRedirect("/");
