@@ -26,22 +26,19 @@ public class IndexController {
     public String index(@AuthenticationPrincipal User user, Model model, HttpSession session)
     {
         String status = (String) session.getAttribute("status");
-        boolean rest_flag = (boolean) session.getAttribute("restEnd");
         model.addAttribute("status", status);
         // 管理者or一般
         boolean hasRoleAdmin = user.getAuthorities().stream()
                 .allMatch(authority -> authority.getAuthority().equals("ADMIN"));
         session.setAttribute("hasRoleAdmin", hasRoleAdmin);
 
-        if(status.equals("勤務中")){
-            if(rest_flag){
-                model.addAttribute("msg1", "退勤");
-                model.addAttribute("action", "/endWork");
-            }else{
-                model.addAttribute("msg1", "休憩開始");
-                model.addAttribute("msg2", "退勤");
-                model.addAttribute("action", "/startRest");
-          }
+        if(status.equals("勤務中1")){
+            model.addAttribute("msg1", "休憩開始");
+            model.addAttribute("msg2", "退勤");
+            model.addAttribute("action", "/startRest");
+        }else if(status.equals("勤務中2")){
+            model.addAttribute("msg1", "退勤");
+            model.addAttribute("action", "/endWork");
         }else if(status.equals("未出勤") || status.equals("退勤")){
             model.addAttribute("msg1", "出勤");
             model.addAttribute("msg2", "退勤");
@@ -90,8 +87,7 @@ public class IndexController {
 
         try{
             jdbcTemplate.update(sql, rest_end, "勤務中", attendance_id);
-            session.setAttribute("status", "勤務中");
-            session.setAttribute("restEnd", true);
+            session.setAttribute("status", "勤務中2");
         } catch (Exception e) {
             e.printStackTrace();
         }
