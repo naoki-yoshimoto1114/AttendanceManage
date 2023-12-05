@@ -22,7 +22,7 @@ public class ViewController {
     public String index(Model model)
     {
         // 一覧表示
-        String sql = "SELECT * FROM attendances";
+        String sql = "SELECT * FROM attendances WHERE date = CURRENT_DATE;";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
         model.addAttribute("attendances", result);
         return "user/view";

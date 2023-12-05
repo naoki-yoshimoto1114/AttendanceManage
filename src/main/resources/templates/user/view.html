@@ -15,26 +15,13 @@
                 <th>ステータス</th>
             </tr>
             <tr>
-                <td>テストユーザ</td>
+                <td>モデル</td>
                 <td>9:00</td>
                 <td>18:00</td>
                 <td>自宅</td>
                 <td>出勤中</td>
             </tr>
-            <tr>
-                <td>テストユーザ2</td>
-                <td>9:00</td>
-                <td>18:00</td>
-                <td>自宅</td>
-                <td>出勤中</td>
-            </tr>
-            <tr>
-                <td>テストユーザ3</td>
-                <td>9:00</td>
-                <td>18:00</td>
-                <td>自宅</td>
-                <td>出勤中</td>
-            </tr>
+
             <tr th:each="attendance : ${attendances}">
                 <td th:text="${attendance.user_id}"></td>
                 <td th:text="${attendance.begin_time}"></td>

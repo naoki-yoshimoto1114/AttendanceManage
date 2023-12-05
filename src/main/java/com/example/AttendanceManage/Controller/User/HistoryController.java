@@ -21,7 +21,7 @@ public class HistoryController {
         List<Attendance> list = repository.findAll();
 
         for(Attendance a: list){
-            //既にデータがある場合の判定処理を加える
+            //既にデータがある場合の判定処理を加える 未実装
 
 
             if(a.getRest_start() != null && a.getRest_end() != null){
@@ -32,7 +32,7 @@ public class HistoryController {
             }
         }
 
-        //登録処理?
+        //登録処理?　未実装
 
         model.addAttribute("data", list);
 
