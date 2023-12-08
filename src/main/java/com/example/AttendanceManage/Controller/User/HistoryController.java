@@ -2,6 +2,7 @@ package com.example.AttendanceManage.Controller.User;
 
 import com.example.AttendanceManage.Entity.Attendance;
 import com.example.AttendanceManage.repositories.historyRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,23 +17,28 @@ public class HistoryController {
     @Autowired
     historyRepository repository;
 
+    @Transactional
     @GetMapping("history")
     public String index(Model model){
         List<Attendance> list = repository.findAll();
 
         for(Attendance a: list){
-            //既にデータがある場合の判定処理を加える 未実装
 
+            if(a.getRestTime() == null){
+                if(a.getRestStart() != null && a.getRestEnd() != null){
+                    a.calcRestTime(); //休憩時間の算出
+                    repository.saveAndFlush(a);
+                }
+            }
 
-            if(a.getRestStart() != null && a.getRestEnd() != null){
-                a.calcRestTime(); //休憩時間の算出
+            if(a.getWorkingTime() == null){
+                if(a.getBeginTime() != null && a.getEndTime() != null){
+                    a.calcWorkingTime(); //労働時間の算出
+                    repository.saveAndFlush(a);
+                }
             }
-            if(a.getBeginTime() != null && a.getEndTime() != null){
-                a.calcWorkingTime(); //労働時間の算出
-            }
+
         }
-
-        //登録処理?　未実装
 
         model.addAttribute("data", list);
 
