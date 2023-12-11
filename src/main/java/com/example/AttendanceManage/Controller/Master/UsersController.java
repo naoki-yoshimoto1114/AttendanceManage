@@ -24,7 +24,7 @@ public class UsersController {
     @RequestMapping("master/users")
     private String index(Model model)
     {
-        model.addAttribute("users", userCrudRepository.findAll());
+        model.addAttribute("users", userCrudRepository.findAllByOrderById());
         return "master/index";
     }
 
