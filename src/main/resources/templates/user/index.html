@@ -13,7 +13,7 @@
                 <ul class="menu-list">
                     <li th:if="${!status.equals('未出勤')}"><input type="button" class="btn home-btn" name="btn1" th:value="${msg1}" onclick="showAlert()"></li>
                     <li th:if="${status.equals('未出勤')}"><input type="submit" class="btn home-btn" name="btn1" th:value="${msg1}"></li>
-                    <li th:if="${status.equals('勤務中1')}"><input type="submit" class="btn home-btn" name="btn2" th:value="${msg2}" formaction="/endWork" onclick="confirm()"></li>
+                    <li th:if="${status.equals('勤務中1')}"><input type="submit" class="btn home-btn" name="btn2" th:value="${msg2}" formaction="/endWork" onclick="window.confirm('退勤します。よろしいですか？')"></li>
                 </ul>
             </div>
         </form>
@@ -25,9 +25,6 @@
         if(result){
             document.form.submit();
         }
-    }
-    function confirm(){
-        alert('退勤します。よろしいですか？');
     }
     </script>
 </body>
