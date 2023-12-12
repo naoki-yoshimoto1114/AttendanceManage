@@ -21,10 +21,10 @@ class UserRepositoryTest {
     @Test
     void findAll() {
         List<User> actual = userRepository.findAll();
-        User user1 = new User(1, "00001",  "John Doe", "johndoe@example.com", "password1", "123-456-7890", "Test user 1", "USER");
-        User user2 = new User(2, "00002",  "Jane Smith", "janesmith@example.com", "password2", "987-654-3210", "Test user 2", "ADMIN");
-        User user3 = new User(3, "00003",  "Alice Johnson", "alicejohnson@example.com", "password3", "555-555-5555", "Test user 3", "USER");
-        User user4 = new User(4, "00004",  "Bob Brown", "bobbrown@example.com", "password4", "777-888-9999", "Test user 4", "ADMIN");
+        User user1 = new User(1, "00001",  "John Doe", "johndoe@example.com", "password1", "123-456-7890", "Test user 1", "USER", "営業部");
+        User user2 = new User(2, "00002",  "Jane Smith", "janesmith@example.com", "password2", "987-654-3210", "Test user 2", "ADMIN", "開発部");
+        User user3 = new User(3, "00003",  "Alice Johnson", "alicejohnson@example.com", "password3", "555-555-5555", "Test user 3", "USER", "人事部");
+        User user4 = new User(4, "00004",  "Bob Brown", "bobbrown@example.com", "password4", "777-888-9999", "Test user 4", "ADMIN", "開発部");
         assertTrue(actual.contains(user1));
         assertTrue(actual.contains(user2));
         assertTrue(actual.contains(user3));
@@ -60,10 +60,10 @@ class UserRepositoryTest {
         User actual2 = userRepository.findById(2);
         User actual3 = userRepository.findById(3);
         User actual4 = userRepository.findById(4);
-        User user1 = new User(1, "00001",  "John Doe", "johndoe@example.com", "password1", "123-456-7890", "Test user 1", "USER");
-        User user2 = new User(2, "00002",  "Jane Smith", "janesmith@example.com", "password2", "987-654-3210", "Test user 2", "ADMIN");
-        User user3 = new User(3, "00003",  "Alice Johnson", "alicejohnson@example.com", "password3", "555-555-5555", "Test user 3", "USER");
-        User user4 = new User(4, "00004",  "Bob Brown", "bobbrown@example.com", "password4", "777-888-9999", "Test user 4", "ADMIN");
+        User user1 = new User(1, "00001",  "John Doe", "johndoe@example.com", "password1", "123-456-7890", "Test user 1", "USER", "営業部");
+        User user2 = new User(2, "00002",  "Jane Smith", "janesmith@example.com", "password2", "987-654-3210", "Test user 2", "ADMIN", "開発部");
+        User user3 = new User(3, "00003",  "Alice Johnson", "alicejohnson@example.com", "password3", "555-555-5555", "Test user 3", "USER", "人事部");
+        User user4 = new User(4, "00004",  "Bob Brown", "bobbrown@example.com", "password4", "777-888-9999", "Test user 4", "ADMIN", "開発部");
         assertEquals(actual1, user1);
         assertEquals(actual2, user2);
         assertEquals(actual3, user3);
@@ -109,11 +109,11 @@ class UserRepositoryTest {
         List<User> beforeList = userRepository.findAll();
         System.out.println(beforeList);
 
-        User user1 = new User(1, "00001",  "John Doe", "johndoe@example.com", "password1", "123-456-7890", "Test user 1", "USER");
-        User user2 = new User(2, "00002",  "Jane Smith", "janesmith@example.com", "password2", "987-654-3210", "Test user 2", "ADMIN");
-        User user3 = new User(3, "00003",  "Alice Johnson", "alicejohnson@example.com", "password3", "555-555-5555", "Test user 3", "USER");
-        User user4 = new User(4, "00004",  "Bob Brown", "bobbrown@example.com", "password4", "777-888-9999", "Test user 4", "ADMIN");
-        User deleteUser = new User(id, "00008",  "new delete user", null, "testpassword", null, null, "USER");
+        User user1 = new User(1, "00001",  "John Doe", "johndoe@example.com", "password1", "123-456-7890", "Test user 1",  "USER", "営業部");
+        User user2 = new User(2, "00002",  "Jane Smith", "janesmith@example.com", "password2", "987-654-3210", "Test user 2", "ADMIN", "開発部");
+        User user3 = new User(3, "00003",  "Alice Johnson", "alicejohnson@example.com", "password3", "555-555-5555", "Test user 3", "USER", "人事部");
+        User user4 = new User(4, "00004",  "Bob Brown", "bobbrown@example.com", "password4", "777-888-9999", "Test user 4", "ADMIN", "開発部");
+        User deleteUser = new User(id, "00008",  "new delete user", null, "testpassword", null, null, "USER", "開発部");
         assertTrue(beforeList.contains(user1));
         assertTrue(beforeList.contains(user2));
         assertTrue(beforeList.contains(user3));

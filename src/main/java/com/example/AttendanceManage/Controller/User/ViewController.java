@@ -24,9 +24,17 @@ public class ViewController {
     @GetMapping("view")
     public String index(Model model)
     {
+        //sessionからidかuseridなどのログインユーザの固有データ入手
+        //条件指定 select 部署 from なんちゃら where id
+        String department = (String)session.getAttribute("department");
+
+        // 保留　attendances.date = CURRENT_DATE AND
+
         // 一覧表示
-        String sql = "SELECT * FROM attendances";
-        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+        String sql = "SELECT * FROM attendances INNER JOIN users ON attendances.user_id = users.user_id " +
+                "WHERE attendances.date = CURRENT_DATE AND " +
+                "users.department = ?";
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, department);
         model.addAttribute("attendances", result);
         return "user/view";
     }
