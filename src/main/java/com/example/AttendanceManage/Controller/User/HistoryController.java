@@ -2,6 +2,7 @@ package com.example.AttendanceManage.Controller.User;
 
 import com.example.AttendanceManage.Entity.Attendance;
 import com.example.AttendanceManage.repositories.historyRepository;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,14 @@ public class HistoryController {
     @Autowired
     historyRepository repository;
 
+    @Autowired
+    private HttpSession session;
+
     @Transactional
     @GetMapping("history")
     public String index(Model model){
-        List<Attendance> list = repository.findAll();
+        String user_id = (String)session.getAttribute("userId");
+        List<Attendance> list = repository.findByUserIdOrderByDateAsc(user_id);
 
         for(Attendance a: list){
 

@@ -19,7 +19,7 @@
             </tr>
             <tr th:each="attendance : ${attendances}">
                 <td th:text="${attendance.name}"></td>
-                <td th:text="${attendance.begin_time}"></td>
+                <td th:text="${attendance.begin_time}?: '--:--'"></td>
                 <td th:text="${attendance.rest_start}?: '--:--'"></td>
                 <td th:text="${attendance.rest_end}?: '--:--'"></td>
                 <td th:text="${attendance.end_time}?: '--:--'"></td>
