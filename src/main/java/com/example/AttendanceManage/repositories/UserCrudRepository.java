@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface UserCrudRepository extends CrudRepository<User, Integer> {
     Optional<User> findByUserId(String userId);
     List<User> findAllByOrderById();
+    boolean existsByUserId(String userId);
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -35,8 +36,14 @@ public class UsersController {
     }
 
     @PostMapping("master/user/create")
-    private String create(@ModelAttribute User user)
+    private String create(@ModelAttribute User user, Model model)
     {
+        if(userCrudRepository.existsByUserId(user.getUserId()) || Objects.equals(user.getUserId(), ""))
+        {
+            String errMsg = "有効なユーザIDを入力してください。";
+            model.addAttribute("errMsg", errMsg);
+            return "master/user_add";
+        }
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
         userCrudRepository.save(user);
