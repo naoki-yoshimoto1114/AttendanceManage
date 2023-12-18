@@ -27,13 +27,13 @@ public class UserRepository {
 
             User user = new User();
             user.setId((int) map.get("id"));
-            user.setUser_id((String) map.get("user_id"));
+            user.setUserId((String) map.get("user_id"));
             user.setName((String) map.get("name"));
             user.setEmail((String) map.get("email"));
             user.setPassword((String) map.get("password"));
             user.setTel((String) map.get("tel"));
             user.setRemarks((String) map.get("remarks"));
-            user.setRole((int) map.get("role"));
+            user.setRole((String) map.get("role"));
 
             list.add(user);
         }
@@ -46,7 +46,7 @@ public class UserRepository {
                     " VALUES (?, ?, ?, ?, ?, ?, ?)";
         try
         {
-            jdbcTemplate.update(sql, user.getUser_id(), user.getName(), null, user.getPassword(), null, null, user.getRole());
+            jdbcTemplate.update(sql, user.getUserId(), user.getName(), null, user.getPassword(), null, null, user.getRole());
         }
         catch(Exception e)
         {
@@ -61,13 +61,13 @@ public class UserRepository {
 
         User user = new User();
         user.setId((int) resultMap.get("id"));
-        user.setUser_id((String) resultMap.get("user_id"));
+        user.setUserId((String) resultMap.get("user_id"));
         user.setName((String) resultMap.get("name"));
         user.setEmail((String) resultMap.get("email"));
         user.setPassword((String) resultMap.get("password"));
         user.setTel((String) resultMap.get("tel"));
         user.setRemarks((String) resultMap.get("remarks"));
-        user.setRole((int) resultMap.get("role"));
+        user.setRole((String) resultMap.get("role"));
 
         return user;
     }
@@ -77,7 +77,7 @@ public class UserRepository {
         String sql = "UPDATE users SET name = ?, user_id = ?, password = ?, role = ? WHERE id = ?";
         try
         {
-            jdbcTemplate.update(sql, user.getName(), user.getUser_id(), user.getPassword(), user.getRole(), user.getId());
+            jdbcTemplate.update(sql, user.getName(), user.getUserId(), user.getPassword(), user.getRole(), user.getId());
         }
         catch(Exception e)
         {

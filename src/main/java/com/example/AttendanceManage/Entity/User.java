@@ -16,8 +16,8 @@ public class User {
     @Column
     private Integer id;
 
-    @Column
-    private String user_id;
+    @Column(name = "user_id")
+    private String userId;
 
     @Column
     private String name;
@@ -35,5 +35,8 @@ public class User {
     private String remarks;
 
     @Column
-    private int role;
+    private String role;
+
+    @Column
+    private String department;
 }

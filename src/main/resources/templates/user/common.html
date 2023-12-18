@@ -13,11 +13,17 @@
             <div class="menu">
                 <ul>
                     <li><a href="/">勤怠入力</a></li>
-                    <li><a href="/workplace">勤務場所登録</a></li>
                     <li><a href="/address">連絡先登録</a></li>
                     <li><a href="/history">勤怠履歴一覧表示</a></li>
                     <li><a href="/view">勤務状況一覧表示</a></li>
-                    <li><a href="/login">ログアウト</a></li>
+                    <th:block th:if="${session.hasRoleAdmin}">
+                        <li><input type="button" onclick="location.href='/master/users'" value="管理画面へ"></li>
+                    </th:block>
+                    <li>
+                        <form th:action="@{/logout}" method="POST">
+                            <input type="submit" value="ログアウト">
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>

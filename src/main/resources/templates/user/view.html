@@ -10,36 +10,21 @@
             <tr>
                 <th>氏名</th>
                 <th>勤務開始時間</th>
+                <th>休憩開始時間</th>
+                <th>休憩終了時間</th>
                 <th>勤務終了時間</th>
                 <th>勤務場所</th>
+                <th>所属</th>
                 <th>ステータス</th>
             </tr>
-            <tr>
-                <td>テストユーザ</td>
-                <td>9:00</td>
-                <td>18:00</td>
-                <td>自宅</td>
-                <td>出勤中</td>
-            </tr>
-            <tr>
-                <td>テストユーザ2</td>
-                <td>9:00</td>
-                <td>18:00</td>
-                <td>自宅</td>
-                <td>出勤中</td>
-            </tr>
-            <tr>
-                <td>テストユーザ3</td>
-                <td>9:00</td>
-                <td>18:00</td>
-                <td>自宅</td>
-                <td>出勤中</td>
-            </tr>
             <tr th:each="attendance : ${attendances}">
-                <td th:text="${attendance.user_id}"></td>
-                <td th:text="${attendance.begin_time}"></td>
-                <td th:text="${attendance.end_time != null}? ${attendance.end_time} : '--:--'"></td>
-                <td th:text="${attendance.place != null}? ${attendance.place} : '-'"></td>
+                <td th:text="${attendance.name}"></td>
+                <td th:text="${attendance.begin_time}?: '--:--'"></td>
+                <td th:text="${attendance.rest_start}?: '--:--'"></td>
+                <td th:text="${attendance.rest_end}?: '--:--'"></td>
+                <td th:text="${attendance.end_time}?: '--:--'"></td>
+                <td th:text="${attendance.place}?: '-'"></td>
+                <td th:text="${attendance.department}"></td>
                 <td th:text="${attendance.status}"></td>
             </tr>
         </table>
