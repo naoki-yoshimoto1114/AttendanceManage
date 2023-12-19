@@ -6,13 +6,18 @@
     <div th:replace="~{master/common::header}"></div>
     <div class="contents">
         <h2>ユーザ新規登録</h2>
-        <form th:action="@{/master/user/create}" method="POST">
+        <form th:action="@{/master/user/add}" method="POST" th:object="${userAddForm}">
             <p>名前</p>
-            <input type="text" name="name" class="io-tag" th:value="${name}">
+            <input type="text" name="name" class="io-tag" th:value="${name}" th:field="*{name}">
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="errorMsg"></div>
+
             <p>ユーザID</p>
-            <input type="text" name="userId" class="io-tag" th:value="${userId}">
+            <input type="text" name="userId" class="io-tag" th:value="${userId}" th:field="*{userId}">
+            <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="errorMsg"></div>
+
             <p>パスワード</p>
-            <input type="password" name="password" class="io-tag">
+            <input type="password" name="password" class="io-tag" th:field="*{password}">
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="errorMsg"></div>
             <p>
                 所属
                 <select name="department">
@@ -30,9 +35,6 @@
             </p>
             <p><input type="submit" class="btn login-btn" value="新規登録"></p>
         </form>
-        <th:block th:if="${errMsg} != ''">
-            <p th:text="${errMsg}"></p>
-        </th:block>
     </div>
 </body>
 </html>

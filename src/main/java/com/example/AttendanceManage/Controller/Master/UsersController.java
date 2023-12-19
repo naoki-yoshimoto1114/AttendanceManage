@@ -1,12 +1,16 @@
 package com.example.AttendanceManage.Controller.Master;
 
 import com.example.AttendanceManage.Entity.User;
+import com.example.AttendanceManage.Form.UserAddForm;
+import com.example.AttendanceManage.Service.UserService;
 import com.example.AttendanceManage.repositories.UserCrudRepository;
 import com.example.AttendanceManage.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -20,6 +24,8 @@ public class UsersController {
     private UserCrudRepository userCrudRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserService userService;
 
 
     @RequestMapping("master/users")
@@ -30,25 +36,39 @@ public class UsersController {
     }
 
     @GetMapping("master/user/add")
-    private String add()
+    private String add(Model model, UserAddForm userAddForm)
     {
+        model.addAttribute("userAddForm", userAddForm);
         return "master/user_add";
     }
 
-    @PostMapping("master/user/create")
-    private String create(@ModelAttribute User user, Model model)
+    @PostMapping("master/user/add")
+    private String addUser(Model model, @ModelAttribute("userAddForm") @Validated UserAddForm userAddForm, BindingResult bindingResult)
     {
-        if(userCrudRepository.existsByUserId(user.getUserId()) || Objects.equals(user.getUserId(), ""))
+        // バリデーションエラーあり
+        if(bindingResult.hasErrors())
         {
-            String errMsg = "有効なユーザIDを入力してください。";
-            model.addAttribute("errMsg", errMsg);
             return "master/user_add";
         }
-        String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
-        userCrudRepository.save(user);
+        // ユーザ登録
+        userService.addUser(userAddForm);
         return "redirect:/master/users";
     }
+
+//    @PostMapping("master/user/create")
+//    private String create(@ModelAttribute User user, Model model)
+//    {
+//        if(userCrudRepository.existsByUserId(user.getUserId()) || Objects.equals(user.getUserId(), ""))
+//        {
+//            String errMsg = "有効なユーザIDを入力してください。";
+//            model.addAttribute("errMsg", errMsg);
+//            return "master/user_add";
+//        }
+//        String hashedPassword = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hashedPassword);
+//        userCrudRepository.save(user);
+//        return "redirect:/master/users";
+//    }
 
     @GetMapping("master/user/edit/{id}")
     private String edit(@PathVariable Integer id, Model model)
