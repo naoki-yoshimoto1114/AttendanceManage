@@ -6,17 +6,16 @@ import com.example.AttendanceManage.Form.UserEditForm;
 import com.example.AttendanceManage.Service.UserService;
 import com.example.AttendanceManage.repositories.UserCrudRepository;
 import com.example.AttendanceManage.repositories.UserRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.example.AttendanceManage.util.AppUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -29,6 +28,8 @@ public class UsersController {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private UserService userService;
+    @Autowired
+    private MessageSource messageSource;
 
 
     @RequestMapping("master/users")
@@ -88,7 +89,8 @@ public class UsersController {
         if(userCrudRepository.existsByUserIdAndIdNot(userEditForm.getUserId(), user.getId()))
         {
             // 重複あり
-            model.addAttribute("userIdErrMsg", "このユーザIDは既に登録されています。");
+            String errorMsg = AppUtil.getMessage(messageSource, "validate.existsUserId");
+            model.addAttribute("userIdErrMsg", errorMsg);
             return "/master/user_edit";
         }
 
