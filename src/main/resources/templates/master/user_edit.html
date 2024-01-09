@@ -6,19 +6,29 @@
     <div th:replace="~{master/common::header}"></div>
     <div class="contents">
         <h2>ユーザ編集</h2>
-        <form th:action="@{'/master/user/update/' + ${user.id}}" method="POST">
+        <form th:action="@{/master/user/update}" method="POST" th:object="${userEditForm}">
+            <input type="hidden" name="id" th:value="${user.id}">
             <p>名前</p>
-            <input type="text" class="io-tag" name="name" th:value="${user.name}">
+            <input type="text" class="io-tag" name="name" th:value="${user.name}" th:field="*{name}">
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="errorMsg"></div>
+
             <p>ユーザID</p>
-            <input type="text" class="io-tag" name="userId" th:value="${user.userId}">
+            <input type="text" class="io-tag" name="userId" th:value="${user.userId}" th:field="*{userId}">
+            <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="errorMsg"></div>
+            <th:block th:if="${userIdErrMsg != null}">
+                <div th:text="${userIdErrMsg}" class="errorMsg"></div>
+            </th:block>
+
             <p>パスワード</p>
-            <input type="password" class="io-tag" name="password">
+            <input type="password" class="io-tag" name="password" th:field="*{password}">
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="errorMsg"></div>
+
             <p>
                 所属
-                <select>
-                    <option>開発部</option>
-                    <option>営業部</option>
-                    <option>人事部</option>
+                <select name="department">
+                    <option value="開発部" th:selected="${user.department == '開発部'}">開発部</option>
+                    <option value="営業部" th:selected="${user.department == '営業部'}">営業部</option>
+                    <option value="人事部" th:selected="${user.department == '人事部'}">人事部</option>
                 </select>
             </p>
             <p>
