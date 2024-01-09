@@ -39,7 +39,9 @@
                 </select>
             </p>
             <input type="submit" class="btn" value="更新">
-            <input type="button" onclick="deleteUser()" class="btn" value="削除">
+            <th:block th:if="${user.id != session.id}">
+                <input type="button" onclick="deleteUser()" class="btn" value="削除">
+            </th:block>
         </form>
         <form name="delete_form" th:action="@{/master/user/delete}" method="POST">
             <input type="hidden" name="id" th:value="${user.id}">
