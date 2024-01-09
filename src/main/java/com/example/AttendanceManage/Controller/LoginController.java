@@ -1,7 +1,9 @@
 package com.example.AttendanceManage.Controller;
 
+import com.example.AttendanceManage.util.AppUtil;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,9 @@ public class LoginController {
     @Autowired
     private HttpSession session;
 
+    @Autowired
+    private MessageSource messageSource;
+
     @GetMapping("login")
     public String index()
     {
@@ -25,8 +30,8 @@ public class LoginController {
     @GetMapping(value = "login", params = "error")
     public String indexWithError(Model model)
     {
-        Exception errorInfo = (Exception) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-        model.addAttribute("errorMsg", errorInfo.getMessage());
+        String errorMsg = AppUtil.getMessage(messageSource, "login.wrongInput");
+        model.addAttribute("errorMsg", errorMsg);
         return "login";
     }
 }
