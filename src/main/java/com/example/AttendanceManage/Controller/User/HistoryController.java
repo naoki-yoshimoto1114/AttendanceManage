@@ -1,29 +1,38 @@
 package com.example.AttendanceManage.Controller.User;
 
 import com.example.AttendanceManage.Entity.Attendance;
-import com.example.AttendanceManage.repositories.historyRepository;
+import com.example.AttendanceManage.Service.AttendanceService;
+import com.example.AttendanceManage.repositories.HistoryRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @Controller
 public class HistoryController {
     @Autowired
-    historyRepository repository;
+    HistoryRepository repository;
+
+    @Autowired
+    private AttendanceService attendanceService;
 
     @Autowired
     private HttpSession session;
 
     @Transactional
     @GetMapping("history")
-    public String index(Model model){
+    public String index(@PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC,
+            sort = {"date"}) Pageable pageable, Model model){
+        Page<Attendance> historyPage = attendanceService.getAttendances(pageable);
+
         String user_id = (String)session.getAttribute("userId");
         List<Attendance> list = repository.findByUserIdOrderByDateAsc(user_id);
 
@@ -46,6 +55,8 @@ public class HistoryController {
         }
 
         model.addAttribute("data", list);
+        model.addAttribute("page", historyPage);
+        model.addAttribute("History", historyPage.getContent());
 
         return "user/history";
     }
