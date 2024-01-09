@@ -14,7 +14,7 @@ public class UserAddForm
 
     @NotEmpty(message = "ユーザIDは入力必須です。")
     @Pattern(regexp = "\\d{5}", message = "5桁の数値を入力してください")
-    @UniqueUserId
+    @UniqueUserId(message = "このユーザIDは既に存在します。")
     private String userId;
 
     @NotEmpty(message = "パスワードは入力必須です。")
