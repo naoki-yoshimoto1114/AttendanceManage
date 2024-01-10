@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public interface HistoryRepository extends JpaRepository<Attendance, Integer> {
 
-    public Page<Attendance> findAll(Pageable pageable);
-    List<Attendance> findByUserIdOrderByDateAsc(String user_id);
+    //public Page<Attendance> findAll(Pageable pageable);
+    public Page<Attendance> findByUserIdOrderByDateDesc(Pageable pageable, String user_id);
+    List<Attendance> findByUserIdOrderByDateDesc(String user_id);
 }

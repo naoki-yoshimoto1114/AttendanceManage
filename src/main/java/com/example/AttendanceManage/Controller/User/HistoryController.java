@@ -31,10 +31,13 @@ public class HistoryController {
     @GetMapping("history")
     public String index(@PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC,
             sort = {"date"}) Pageable pageable, Model model){
-        Page<Attendance> historyPage = attendanceService.getAttendances(pageable);
+
 
         String user_id = (String)session.getAttribute("userId");
-        List<Attendance> list = repository.findByUserIdOrderByDateAsc(user_id);
+        List<Attendance> list = repository.findByUserIdOrderByDateDesc(user_id);
+
+        //ページネーション処理
+        Page<Attendance> historyPage = attendanceService.getAttendances(pageable, user_id);
 
         for(Attendance a: list){
 

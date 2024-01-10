@@ -14,7 +14,7 @@ public class AttendanceService {
     @Autowired
     private HistoryRepository historyRepository;
 
-    public Page<Attendance> getAttendances(Pageable pageable){
-        return historyRepository.findAll(pageable);
+    public Page<Attendance> getAttendances(Pageable pageable, String user_id){
+        return historyRepository.findByUserIdOrderByDateDesc(pageable, user_id);
     }
 }
