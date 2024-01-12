@@ -32,8 +32,7 @@ public class ViewController {
 
         // 一覧表示
         String sql = "SELECT * FROM attendances INNER JOIN users ON attendances.user_id = users.user_id " +
-                "WHERE attendances.date = CURRENT_DATE AND " +
-                "users.department = ?";
+                "WHERE attendances.date = CURRENT_DATE AND users.department = ?" ;
         List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, department);
         model.addAttribute("attendances", result);
         return "user/view";
