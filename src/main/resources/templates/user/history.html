@@ -26,20 +26,20 @@
         <div>
             <ul class="page">
                 <li class="items">
-                    <span th:if="${page.first}">&lt;&lt;最初へ</span>
+                    <span th:if="${page.first}">&lt&lt;最初へ</span>
                     <a
                         th:if="${!page.first}" th:href="@{history(page = 0)}"
                     >
-                        &lt;&lt;最初へ
+                        &lt&lt最初へ
                     </a>
                 </li>
                 <li class="items">
-                    <span th:if="${page.first}">&lt;前</span>
+                    <span th:if="${page.first}">&lt前</span>
                     <a
                             th:if="${!page.first}"
                             th:href="@{history(page = ${page.number} - 1)}"
                     >
-                        &lt;前
+                        &lt前
                     </a>
                 </li>
                 <!--可変-->
@@ -93,20 +93,20 @@
                 </li>
                 <!--可変終わり-->
                 <li class="items">
-                    <span th:if="${page.last}">次&gt;&gt;</span>
+                    <span th:if="${page.last}">次&gt;</span>
                     <a
                             th:if="${!page.last}"
                             th:href="@{history(page = (${page.number} + 1))}"
                     >
-                        次&gt;&gt;
+                        次&gt;
                     </a>
                 </li>
                 <li class="items">
-                    <span th:if="${page.last}">最後へ&gt;</span>
+                    <span th:if="${page.last}">最後へ&gt&gt</span>
                     <a
                             th:if="${!page.last}" th:href="@{history(page = ${page.totalPages} - 1)}"
                     >
-                        最後へ&gt;&gt;
+                        最後へ&gt&gt
                     </a>
                 </li>
             </ul>
