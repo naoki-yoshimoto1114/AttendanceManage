@@ -70,6 +70,24 @@ ul
     list-style: none;
 }
 
+.page li{
+    display: inline;
+}
+
+.page li:hover{
+    background: #ddffdd;
+    border-radius: 5px;
+}
+
+.page .items {
+    padding: 8px 16px;
+    border: 1px solid #ddd; /* Gray */
+}
+
+.items a{
+    text-decoration-line: none;
+}
+
 .menu > ul
 {
     display: flex;
