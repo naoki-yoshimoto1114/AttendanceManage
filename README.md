@@ -13,8 +13,19 @@
 ### usersテーブル
 <ol>
   <li>DDLフォルダにあるusers.sqlのcreate文を実行し、データベースにusersテーブルを作成する。</li>
-  <li>DMLフォルダにあるusers.sqlのinsert文を実行し、テストデータを作成する。<br>  </li>
+  <li>DMLフォルダにあるusers.sqlのinsert文を実行し、テストデータを作成する。<br></li>
 </ol>
+<table>
+  <tr>
+    <th>権限</th><th>ユーザID</th><th>パスワード</th>
+  </tr>
+  <tr>
+    <td>一般</td><td>90001</td><td>1234</td>
+  </tr>
+  <tr>
+    <td>管理者</td><td>90002</td><td>12345</td>
+  </tr>
+</table>
 
 ### attendancesテーブル
 <ol>
