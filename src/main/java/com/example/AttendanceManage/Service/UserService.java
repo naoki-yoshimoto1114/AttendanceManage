@@ -1,6 +1,7 @@
 package com.example.AttendanceManage.Service;
 
 import com.example.AttendanceManage.Entity.User;
+import com.example.AttendanceManage.Form.AddressAddForm;
 import com.example.AttendanceManage.Form.UserAddForm;
 import com.example.AttendanceManage.Form.UserEditForm;
 import com.example.AttendanceManage.repositories.UserCrudRepository;
@@ -51,4 +52,19 @@ public class UserService
             userCrudRepository.save(user);
         }
     }
+    @Transactional
+    public void updateAddress(AddressAddForm form, Integer id)
+    {
+        Optional<User> optionalUser = userCrudRepository.findById(id);
+        if(optionalUser.isPresent())
+        {
+            User user = optionalUser.get();
+            user.setEmail(form.getEmail());
+            user.setTel(form.getTel());
+            user.setRemarks(form.getRemarks());
+
+            userCrudRepository.save(user);
+        }
+    }
+
 }
