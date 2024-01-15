@@ -1,5 +1,6 @@
 package com.example.AttendanceManage.Service;
 
+import com.example.AttendanceManage.Entity.Attendance;
 import com.example.AttendanceManage.Entity.User;
 import com.example.AttendanceManage.Form.AddressAddForm;
 import com.example.AttendanceManage.Form.UserAddForm;
@@ -7,9 +8,12 @@ import com.example.AttendanceManage.Form.UserEditForm;
 import com.example.AttendanceManage.repositories.UserCrudRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -65,6 +69,11 @@ public class UserService
 
             userCrudRepository.save(user);
         }
+    }
+
+    public Page<User> getUsers(Pageable pageable)
+    {
+        return userCrudRepository.findAllByOrderById(pageable);
     }
 
 }

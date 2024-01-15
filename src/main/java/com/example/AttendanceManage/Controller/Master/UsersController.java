@@ -9,6 +9,9 @@ import com.example.AttendanceManage.repositories.UserRepository;
 import com.example.AttendanceManage.util.AppUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,10 +35,13 @@ public class UsersController {
     private MessageSource messageSource;
 
 
-    @RequestMapping("master/users")
-    private String index(Model model)
+    @GetMapping("master/users")
+    private String index(@PageableDefault(page = 0, size = 10) Pageable pageable, Model model)
     {
-        model.addAttribute("users", userCrudRepository.findAllByOrderById());
+        Page<User> userPage = userCrudRepository.findAllByOrderById(pageable);
+//        model.addAttribute("users", userCrudRepository.findAllByOrderById());
+        model.addAttribute("page", userPage);
+        model.addAttribute("users", userPage.getContent());
         return "master/index";
     }
 

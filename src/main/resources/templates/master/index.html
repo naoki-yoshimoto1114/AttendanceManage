@@ -19,6 +19,94 @@
                 <td th:text="${user.role}"></td>
             </tr>
         </table>
+        <div th:if="${users.size() > 0}">
+            <ul class="page">
+                <li class="items">
+                    <span th:if="${page.first}">&lt;&lt;最初へ</span>
+                    <a
+                            th:if="${!page.first}" th:href="@{users(page = 0)}"
+                    >
+                        &lt;&lt;最初へ
+                    </a>
+                </li>
+                <li class="items">
+                    <span th:if="${page.first}">&lt;前</span>
+                    <a
+                            th:if="${!page.first}"
+                            th:href="@{users(page = ${page.number} - 1)}"
+                    >
+                        &lt;前
+                    </a>
+                </li>
+                <!--可変-->
+                <li class="items"
+                    th:if="${page.totalPages <= 5}"
+                    th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
+                >
+                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+                    <a
+                            th:if="${i} != ${page.number}"
+                            th:href="@{users(page = ${i})}"
+                    >
+                        <span class="other-page" th:text="${i+1}">1</span>
+                    </a>
+                </li>
+                <li class="items"
+                    th:if="${page.totalPages > 5 && page.number < 3}"
+                    th:each="i : ${#numbers.sequence(0, 4)}"
+                >
+                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+                    <a
+                            th:if="${i} != ${page.number}"
+                            th:href="@{users(page = ${i})}"
+                    >
+                        <span class="other-page" th:text="${i+1}">1</span>
+                    </a>
+                </li>
+                <li class="items"
+                    th:if="${page.totalPages > 5 && 2 < page.number && page.number < page.totalPages - 3}"
+                    th:each="i : ${#numbers.sequence(page.number - 2, page.number + 2)}"
+                >
+                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+                    <a
+                            th:if="${i} != ${page.number}"
+                            th:href="@{users(page = ${i})}"
+                    >
+                        <span class="other-page" th:text="${i+1}">1</span>
+                    </a>
+                </li>
+                <li class="items"
+                    th:if="${page.totalPages > 5 && page.number >= page.totalPages - 3}"
+                    th:each="i : ${#numbers.sequence(page.totalPages - 5, page.totalPages - 1)}"
+                >
+                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+                    <a
+                            th:if="${i} != ${page.number}"
+                            th:href="@{users(page = ${i})}"
+                    >
+                        <span class="other-page" th:text="${i+1}">1</span>
+                    </a>
+                </li>
+                <!--可変終わり-->
+                <li class="items">
+                    <span th:if="${page.last}">次&gt;</span>
+                    <a
+                            th:if="${!page.last}"
+                            th:href="@{users(page = (${page.number} + 1))}"
+                    >
+                        次&gt;
+                    </a>
+                </li>
+                <li class="items">
+                    <span th:if="${page.last}">最後へ&gt;&gt;</span>
+                    <a
+                            th:if="${!page.last}" th:href="@{users(page = ${page.totalPages} - 1)}"
+                    >
+                        最後へ&gt;&gt;
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
