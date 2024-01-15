@@ -182,3 +182,8 @@ ul
     border-top: 3px solid green;
     padding: 5px 0;
 }
+
+.errorMsg
+{
+    color: red;
+}
