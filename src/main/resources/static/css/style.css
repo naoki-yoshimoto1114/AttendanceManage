@@ -125,6 +125,7 @@ ul
     font-size: 20px;
     cursor: pointer;
     border-radius: 5px;
+    padding: 5px 10px;
 }
 
 .btn:hover
@@ -204,7 +205,6 @@ ul
 /* マウスホバー時のスタイル */
 .btn-link:hover {
     background-color: #ddffdd; /* ホバー時の背景色を変更 */
-    /*border-color: #6B8E23;  ホバー時の枠線色を変更 */
     color: black; /* ホバー時の文字色を変更 */
 }
 
@@ -223,4 +223,9 @@ ul
     font-size: 25px;
     font-weight: bold;
     color: green;
+}
+
+.select-box
+{
+    font-size: 20px;
 }

@@ -7,20 +7,20 @@
     <div class="contents">
         <h2>ユーザ新規登録</h2>
         <form th:action="@{/master/user/add}" method="POST" th:object="${userAddForm}">
-            <p>名前</p>
+            <p><span class="errorMsg">※</span> 名前</p>
             <input type="text" name="name" class="io-tag" th:value="${name}" th:field="*{name}">
             <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="errorMsg"></div>
 
-            <p>ユーザID</p>
+            <p><span class="errorMsg">※</span> ユーザID</p>
             <input type="text" name="userId" class="io-tag" th:value="${userId}" th:field="*{userId}">
             <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="errorMsg"></div>
 
-            <p>パスワード</p>
+            <p><span class="errorMsg">※</span> パスワード</p>
             <input type="password" name="password" class="io-tag" th:field="*{password}">
             <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="errorMsg"></div>
             <p>
                 所属
-                <select name="department">
+                <select class="select-box" name="department">
                     <option value="開発部" selected>開発部</option>
                     <option value="営業部">営業部</option>
                     <option value="人事部">人事部</option>
@@ -28,7 +28,7 @@
             </p>
             <p>
                 権限
-                <select name="role">
+                <select class="select-box" name="role">
                     <option value="USER">一般</option>
                     <option value="ADMIN">管理者</option>
                 </select>
