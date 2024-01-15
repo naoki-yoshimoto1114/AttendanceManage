@@ -187,3 +187,40 @@ ul
 {
     color: red;
 }
+
+/* ボタン風のaタグのスタイル */
+.btn-link {
+    display: inline-block;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    background-color: white; /* 背景色を白に変更 */
+    color: black; /* 文字の色を黒に */
+    border: 3px solid green; /* 枠線の色を緑に */
+    border-radius: 4px; /* ボーダーの角を丸める */
+    cursor: pointer;
+}
+
+/* マウスホバー時のスタイル */
+.btn-link:hover {
+    background-color: #ddffdd; /* ホバー時の背景色を変更 */
+    /*border-color: #6B8E23;  ホバー時の枠線色を変更 */
+    color: black; /* ホバー時の文字色を変更 */
+}
+
+.select-month
+{
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.year-month
+{
+    margin: 0 30px;
+    font-size: 25px;
+    font-weight: bold;
+    color: green;
+}
