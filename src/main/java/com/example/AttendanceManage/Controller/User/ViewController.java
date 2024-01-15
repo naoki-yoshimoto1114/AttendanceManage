@@ -28,8 +28,6 @@ public class ViewController {
         //条件指定 select 部署 from なんちゃら where id
         String department = (String)session.getAttribute("department");
 
-        // 保留　attendances.date = CURRENT_DATE AND
-
         // 一覧表示
         String sql = "SELECT * FROM attendances INNER JOIN users ON attendances.user_id = users.user_id " +
                 "WHERE attendances.date = CURRENT_DATE AND users.department = ?" ;

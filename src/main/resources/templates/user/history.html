@@ -22,7 +22,7 @@
                     <td th:text="${attendance.beginTime}"></td>
                     <td th:text="${attendance.endTime != null}? ${attendance.endTime} : '--:--'"></td>
                     <td th:text="${attendance.restTime != null} ? ${attendance.restTime} : '--:--'"></td>
-                    <td th:text="${attendance.workingTime != null} ? ${attendance.workingTime} : '--:--'">
+                    <td th:text="${attendance.workingTime != null} ? ${attendance.workingTime} : '--:--'"></td>
                 </tr>
             </th:block>
         </table>
@@ -53,7 +53,7 @@
                         th:if="${page.totalPages <= 5}"
                         th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
                 >
-                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}">1</span>
+                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
                     <a
                             th:if="${i} != ${page.number}"
                             th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
@@ -65,7 +65,7 @@
                     th:if="${page.totalPages > 5 && page.number < 3}"
                     th:each="i : ${#numbers.sequence(0, 4)}"
                 >
-                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}">1</span>
+                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
                     <a
                             th:if="${i} != ${page.number}"
                             th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
@@ -77,7 +77,7 @@
                     th:if="${page.totalPages > 5 && 2 < page.number && page.number < page.totalPages - 3}"
                     th:each="i : ${#numbers.sequence(page.number - 2, page.number + 2)}"
                 >
-                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}">1</span>
+                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
                     <a
                             th:if="${i} != ${page.number}"
                             th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
@@ -89,7 +89,7 @@
                     th:if="${page.totalPages > 5 && page.number >= page.totalPages - 3}"
                     th:each="i : ${#numbers.sequence(page.totalPages - 5, page.totalPages - 1)}"
                 >
-                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}">1</span>
+                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
                     <a
                             th:if="${i} != ${page.number}"
                             th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
