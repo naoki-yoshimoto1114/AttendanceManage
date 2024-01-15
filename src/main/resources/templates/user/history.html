@@ -5,7 +5,9 @@
 <body>
     <div th:replace="~{user/common::header}"></div>
     <div class="contents">
-        <h2>勤怠履歴</h2>
+        <h2 th:text="'勤怠履歴 ' + ${year} + '年' + ${month} + '月'"></h2>
+        <a th:href="@{'/history' + ${previousYearMonth}}">前月</a>
+        <a th:href="@{'/history' + ${nextYearMonth}}">次月</a>
         <table class="table">
             <tr>
                 <th>日付</th>
@@ -14,21 +16,25 @@
                 <th>休憩</th>
                 <th>総労働時間</th>
             </tr>
-            <tr th:each="attendance : ${History}">
-                <td th:text="${#temporals.format(attendance.date, 'yyyy/MM/dd')}"></td>
-                <td th:text="${attendance.beginTime}"></td>
-                <td th:text="${attendance.endTime != null}? ${attendance.endTime} : '--:--'"></td>
-                <td th:text="${attendance.restTime != null} ? ${attendance.restTime} : '--:--'"></td>
-                <td th:text="${attendance.workingTime != null} ? ${attendance.workingTime} : '--:--'">
-
-            </tr>
+            <th:block th:if="${History.size() > 0}">
+                <tr th:each="attendance : ${History}">
+                    <td th:text="${#temporals.format(attendance.date, 'yyyy/MM/dd')}"></td>
+                    <td th:text="${attendance.beginTime}"></td>
+                    <td th:text="${attendance.endTime != null}? ${attendance.endTime} : '--:--'"></td>
+                    <td th:text="${attendance.restTime != null} ? ${attendance.restTime} : '--:--'"></td>
+                    <td th:text="${attendance.workingTime != null} ? ${attendance.workingTime} : '--:--'">
+                </tr>
+            </th:block>
         </table>
-        <div>
+        <div th:if="${History.size() == 0}">
+            <p>勤怠履歴データが存在しません。</p>
+        </div>
+        <div th:if="${History.size() > 0}">
             <ul class="page">
                 <li class="items">
                     <span th:if="${page.first}">&lt&lt;最初へ</span>
                     <a
-                        th:if="${!page.first}" th:href="@{history(page = 0)}"
+                        th:if="${!page.first}" th:href="@{history(year = ${year}, month = ${month}, page = 0)}"
                     >
                         &lt&lt最初へ
                     </a>
@@ -37,7 +43,7 @@
                     <span th:if="${page.first}">&lt前</span>
                     <a
                             th:if="${!page.first}"
-                            th:href="@{history(page = ${page.number} - 1)}"
+                            th:href="@{history(year = ${year}, month = ${month}, page = ${page.number} - 1)}"
                     >
                         &lt前
                     </a>
@@ -50,7 +56,7 @@
                     <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}">1</span>
                     <a
                             th:if="${i} != ${page.number}"
-                            th:href="@{history(page = ${i})}"
+                            th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
                     >
                         <span class="other-page" th:text="${i+1}">1</span>
                     </a>
@@ -62,7 +68,7 @@
                     <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}">1</span>
                     <a
                             th:if="${i} != ${page.number}"
-                            th:href="@{history(page = ${i})}"
+                            th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
                     >
                         <span class="other-page" th:text="${i+1}">1</span>
                     </a>
@@ -74,7 +80,7 @@
                     <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}">1</span>
                     <a
                             th:if="${i} != ${page.number}"
-                            th:href="@{history(page = ${i})}"
+                            th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
                     >
                         <span class="other-page" th:text="${i+1}">1</span>
                     </a>
@@ -86,7 +92,7 @@
                     <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}">1</span>
                     <a
                             th:if="${i} != ${page.number}"
-                            th:href="@{history(page = ${i})}"
+                            th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
                     >
                         <span class="other-page" th:text="${i+1}">1</span>
                     </a>
@@ -96,7 +102,7 @@
                     <span th:if="${page.last}">次&gt;</span>
                     <a
                             th:if="${!page.last}"
-                            th:href="@{history(page = (${page.number} + 1))}"
+                            th:href="@{history(year = ${year}, month = ${month}, page = (${page.number} + 1))}"
                     >
                         次&gt;
                     </a>
@@ -104,7 +110,7 @@
                 <li class="items">
                     <span th:if="${page.last}">最後へ&gt&gt</span>
                     <a
-                            th:if="${!page.last}" th:href="@{history(page = ${page.totalPages} - 1)}"
+                            th:if="${!page.last}" th:href="@{history(year = ${year}, month = ${month}, page = ${page.totalPages} - 1)}"
                     >
                         最後へ&gt&gt
                     </a>
