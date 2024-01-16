@@ -22,10 +22,10 @@
             <th:block th:if="${History.size() > 0}">
                 <tr th:each="attendance : ${History}">
                     <td th:text="${#temporals.format(attendance.date, 'yyyy/MM/dd')}"></td>
-                    <td th:text="${attendance.beginTime}"></td>
-                    <td th:text="${attendance.endTime != null}? ${attendance.endTime} : '--:--'"></td>
-                    <td th:text="${attendance.restTime != null} ? ${attendance.restTime} : '--:--'"></td>
-                    <td th:text="${attendance.workingTime != null} ? ${attendance.workingTime} : '--:--'"></td>
+                    <td th:text="${#temporals.format(attendance.beginTime, 'HH:mm')}"></td>
+                    <td th:text="${attendance.endTime != null}? ${#temporals.format(attendance.endTime, 'HH:mm')} : '--:--'"></td>
+                    <td th:text="${attendance.restTime != null} ? ${#temporals.format(attendance.restTime, 'HH:mm')} : '--:--'"></td>
+                    <td th:text="${attendance.workingTime != null} ? ${#temporals.format(attendance.workingTime, 'HH:mm')} : '--:--'"></td>
                 </tr>
             </th:block>
         </table>
