@@ -4,7 +4,7 @@
 </head>
 <body>
     <div th:replace="~{master/common::header}"></div>
-    <div class="wrap-contents">
+    <div class="wrap-contents wrap-small-contents">
         <h2>ユーザ新規登録</h2>
         <div class="contents">
             <form th:action="@{/master/user/add}" method="POST" th:object="${userAddForm}">

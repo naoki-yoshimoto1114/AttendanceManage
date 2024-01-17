@@ -4,7 +4,7 @@
 </head>
 <body>
     <div th:replace="~{master/common::header}"></div>
-    <div class="wrap-contents">
+    <div class="wrap-contents wrap-small-contents">
         <h2>ユーザ編集</h2>
         <div class="contents">
             <form th:action="@{/master/user/update}" method="POST" th:object="${userEditForm}">
@@ -40,12 +40,12 @@
                     </select>
                 </p>
                 <p>
-                    <button onclick="history.back()" class="btn back-btn" type="button">戻る</button>
                     <input type="submit" class="btn" value="更新">
                     <th:block th:if="${user.id != session.id}">
                         <input type="button" onclick="deleteUser()" class="btn delete-btn" value="削除">
                     </th:block>
                 </p>
+                <button onclick="history.back()" class="btn back-btn" type="button">戻る</button>
             </form>
             <form name="delete_form" th:action="@{/master/user/delete}" method="POST">
                 <input type="hidden" name="id" th:value="${user.id}">

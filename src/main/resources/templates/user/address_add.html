@@ -4,7 +4,7 @@
 </head>
 <body>
     <div th:replace="~{user/common::header}"></div>
-    <div class="wrap-contents">
+    <div class="wrap-contents wrap-small-contents">
         <h2>連絡先登録</h2>
         <div class="contents">
             <form th:action="@{/address/add}" method="POST" th:object="${addressAddForm}">
