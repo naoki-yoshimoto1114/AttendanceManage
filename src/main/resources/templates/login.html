@@ -14,7 +14,7 @@
     <div class="wrap-contents">
         <h2>ログイン</h2>
         <div class="contents">
-            <div class="msg" th:text="${msg}"></div>
+            <div class="msg" th:text="${errorMsg}"></div>
             <form th:action="@{/login}" method="POST">
                 <div class="login-form">
                     <p>ユーザID</p>
