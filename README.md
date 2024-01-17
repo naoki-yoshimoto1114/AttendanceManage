@@ -96,7 +96,7 @@
   </tr>
   <tr>
     <td>CSS</td>
-    <td>未</td>
+    <td>完了</td>
     <td></td>
   </tr>
   <tr>
@@ -124,7 +124,7 @@
   </tr>
   <tr>
     <td>CSS</td>
-    <td>未</td>
+    <td>完了</td>
     <td></td>
   </tr>
 </table>
