@@ -4,122 +4,126 @@
 </head>
 <body>
     <div th:replace="~{user/common::header}"></div>
-    <div class="contents">
+    <div class="wrap-contents">
         <h2>勤怠履歴</h2>
-        <ul class="select-month">
-            <li><a class="btn-link" th:href="@{'/history' + ${previousYearMonth}}">前の月へ</a></li>
-            <li><div class="year-month" th:text="${year} + '年' + ${month} + '月'"></div></li>
-            <li><a class="btn-link" th:href="@{'/history' + ${nextYearMonth}}">次の月へ</a></li>
-        </ul>
-        <table class="table">
-            <tr>
-                <th>日付</th>
-                <th>勤務開始時間</th>
-                <th>勤務終了時間</th>
-                <th>休憩時間</th>
-                <th>総労働時間</th>
-            </tr>
-            <th:block th:if="${History.size() > 0}">
-                <tr th:each="attendance : ${History}">
-                    <td th:text="${#temporals.format(attendance.date, 'yyyy/MM/dd')}"></td>
-                    <td th:text="${#temporals.format(attendance.beginTime, 'HH:mm')}"></td>
-                    <td th:text="${attendance.endTime != null}? ${#temporals.format(attendance.endTime, 'HH:mm')} : '--:--'"></td>
-                    <td th:text="${attendance.restTime != null} ? ${#temporals.format(attendance.restTime, 'HH:mm')} : '--:--'"></td>
-                    <td th:text="${attendance.workingTime != null} ? ${#temporals.format(attendance.workingTime, 'HH:mm')} : '--:--'"></td>
-                </tr>
-            </th:block>
-        </table>
-        <div th:if="${History.size() == 0}">
-            <p>勤怠履歴データが存在しません。</p>
-        </div>
-        <div th:if="${History.size() > 0}">
-            <ul class="page">
-                <li class="items">
-                    <span th:if="${page.first}">&lt;&lt;最初へ</span>
-                    <a
-                        th:if="${!page.first}" th:href="@{history(year = ${year}, month = ${month}, page = 0)}"
-                    >
-                        &lt;&lt;最初へ
-                    </a>
-                </li>
-                <li class="items">
-                    <span th:if="${page.first}">&lt;前</span>
-                    <a
-                            th:if="${!page.first}"
-                            th:href="@{history(year = ${year}, month = ${month}, page = ${page.number} - 1)}"
-                    >
-                        &lt;前
-                    </a>
-                </li>
-                <!--可変-->
-                <li class="items"
-                        th:if="${page.totalPages <= 5}"
-                        th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
-                >
-                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
-                    <a
-                            th:if="${i} != ${page.number}"
-                            th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
-                    >
-                        <span class="other-page" th:text="${i+1}">1</span>
-                    </a>
-                </li>
-                <li class="items"
-                    th:if="${page.totalPages > 5 && page.number < 3}"
-                    th:each="i : ${#numbers.sequence(0, 4)}"
-                >
-                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
-                    <a
-                            th:if="${i} != ${page.number}"
-                            th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
-                    >
-                        <span class="other-page" th:text="${i+1}">1</span>
-                    </a>
-                </li>
-                <li class="items"
-                    th:if="${page.totalPages > 5 && 2 < page.number && page.number < page.totalPages - 3}"
-                    th:each="i : ${#numbers.sequence(page.number - 2, page.number + 2)}"
-                >
-                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
-                    <a
-                            th:if="${i} != ${page.number}"
-                            th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
-                    >
-                        <span class="other-page" th:text="${i+1}">1</span>
-                    </a>
-                </li>
-                <li class="items"
-                    th:if="${page.totalPages > 5 && page.number >= page.totalPages - 3}"
-                    th:each="i : ${#numbers.sequence(page.totalPages - 5, page.totalPages - 1)}"
-                >
-                    <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
-                    <a
-                            th:if="${i} != ${page.number}"
-                            th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
-                    >
-                        <span class="other-page" th:text="${i+1}">1</span>
-                    </a>
-                </li>
-                <!--可変終わり-->
-                <li class="items">
-                    <span th:if="${page.last}">次&gt;</span>
-                    <a
-                            th:if="${!page.last}"
-                            th:href="@{history(year = ${year}, month = ${month}, page = (${page.number} + 1))}"
-                    >
-                        次&gt;
-                    </a>
-                </li>
-                <li class="items">
-                    <span th:if="${page.last}">最後へ&gt;&gt;</span>
-                    <a
-                            th:if="${!page.last}" th:href="@{history(year = ${year}, month = ${month}, page = ${page.totalPages} - 1)}"
-                    >
-                        最後へ&gt;&gt;
-                    </a>
-                </li>
+        <div class="contents">
+
+            <ul class="select-month">
+                <li><a class="btn-link" th:href="@{'/history' + ${previousYearMonth}}">前の月へ</a></li>
+                <li><div class="year-month" th:text="${year} + '年' + ${month} + '月'"></div></li>
+                <li><a class="btn-link" th:href="@{'/history' + ${nextYearMonth}}">次の月へ</a></li>
             </ul>
+            <table class="table">
+                <tr>
+                    <th>日付</th>
+                    <th>勤務開始時間</th>
+                    <th>勤務終了時間</th>
+                    <th>休憩時間</th>
+                    <th>総労働時間</th>
+                </tr>
+                <th:block th:if="${History.size() > 0}">
+                    <tr th:each="attendance : ${History}">
+                        <td th:text="${#temporals.format(attendance.date, 'yyyy/MM/dd')}"></td>
+                        <td th:text="${#temporals.format(attendance.beginTime, 'HH:mm')}"></td>
+                        <td th:text="${attendance.endTime != null}? ${#temporals.format(attendance.endTime, 'HH:mm')} : '--:--'"></td>
+                        <td th:text="${attendance.restTime != null} ? ${#temporals.format(attendance.restTime, 'HH:mm')} : '--:--'"></td>
+                        <td th:text="${attendance.workingTime != null} ? ${#temporals.format(attendance.workingTime, 'HH:mm')} : '--:--'"></td>
+                    </tr>
+                </th:block>
+            </table>
+            <div th:if="${History.size() == 0}">
+                <p>勤怠履歴データが存在しません。</p>
+            </div>
+            <div th:if="${History.size() > 0}">
+                <ul class="page">
+                    <li class="items">
+                        <span th:if="${page.first}">&lt;&lt;最初へ</span>
+                        <a
+                            th:if="${!page.first}" th:href="@{history(year = ${year}, month = ${month}, page = 0)}"
+                        >
+                            &lt;&lt;最初へ
+                        </a>
+                    </li>
+                    <li class="items">
+                        <span th:if="${page.first}">&lt;前</span>
+                        <a
+                                th:if="${!page.first}"
+                                th:href="@{history(year = ${year}, month = ${month}, page = ${page.number} - 1)}"
+                        >
+                            &lt;前
+                        </a>
+                    </li>
+                    <!--可変-->
+                    <li class="items"
+                            th:if="${page.totalPages <= 5}"
+                            th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
+                    >
+                        <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+                        <a
+                                th:if="${i} != ${page.number}"
+                                th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
+                        >
+                            <span class="other-page" th:text="${i+1}">1</span>
+                        </a>
+                    </li>
+                    <li class="items"
+                        th:if="${page.totalPages > 5 && page.number < 3}"
+                        th:each="i : ${#numbers.sequence(0, 4)}"
+                    >
+                        <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+                        <a
+                                th:if="${i} != ${page.number}"
+                                th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
+                        >
+                            <span class="other-page" th:text="${i+1}">1</span>
+                        </a>
+                    </li>
+                    <li class="items"
+                        th:if="${page.totalPages > 5 && 2 < page.number && page.number < page.totalPages - 3}"
+                        th:each="i : ${#numbers.sequence(page.number - 2, page.number + 2)}"
+                    >
+                        <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+                        <a
+                                th:if="${i} != ${page.number}"
+                                th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
+                        >
+                            <span class="other-page" th:text="${i+1}">1</span>
+                        </a>
+                    </li>
+                    <li class="items"
+                        th:if="${page.totalPages > 5 && page.number >= page.totalPages - 3}"
+                        th:each="i : ${#numbers.sequence(page.totalPages - 5, page.totalPages - 1)}"
+                    >
+                        <span class="now-page" th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+                        <a
+                                th:if="${i} != ${page.number}"
+                                th:href="@{history(year = ${year}, month = ${month}, page = ${i})}"
+                        >
+                            <span class="other-page" th:text="${i+1}">1</span>
+                        </a>
+                    </li>
+                    <!--可変終わり-->
+                    <li class="items">
+                        <span th:if="${page.last}">次&gt;</span>
+                        <a
+                                th:if="${!page.last}"
+                                th:href="@{history(year = ${year}, month = ${month}, page = (${page.number} + 1))}"
+                        >
+                            次&gt;
+                        </a>
+                    </li>
+                    <li class="items">
+                        <span th:if="${page.last}">最後へ&gt;&gt;</span>
+                        <a
+                                th:if="${!page.last}" th:href="@{history(year = ${year}, month = ${month}, page = ${page.totalPages} - 1)}"
+                        >
+                            最後へ&gt;&gt;
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
+
     </div>
 </body>
 </html>

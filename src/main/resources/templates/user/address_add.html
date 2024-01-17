@@ -4,22 +4,24 @@
 </head>
 <body>
     <div th:replace="~{user/common::header}"></div>
-    <div class="contents">
+    <div class="wrap-contents">
         <h2>連絡先登録</h2>
-        <form th:action="@{/address/add}" method="POST" th:object="${addressAddForm}">
-            <p><span class="errorMsg">※</span> メールアドレス</p>
-            <input type="email"  name="email" class="io-tag" th:value="${user.email}"  placeholder="xxx@xxx.xxx" th:field="*{email}">
-            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="errorMsg"></div>
+        <div class="contents">
+            <form th:action="@{/address/add}" method="POST" th:object="${addressAddForm}">
+                <p><label for="email"><span class="msg">※</span> メールアドレス</label></p>
+                <input type="email" id="email" name="email" class="io-tag" th:value="${user.email}"  placeholder="xxx@xxx.xxx" th:field="*{email}">
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="msg"></div>
 
 
-            <p><span class="errorMsg">※</span> 電話番号</p>
-            <input type="text"  name="tel" class="io-tag" th:value="${user.tel}" th:field="*{tel}" placeholder="000-0000-0000">
-            <div th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}" class="errorMsg"></div>
+                <p><label for="tel"><span class="msg">※</span> 電話番号</label></p>
+                <input type="text" id="tel" name="tel" class="io-tag" th:value="${user.tel}" th:field="*{tel}" placeholder="000-0000-0000">
+                <div th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}" class="msg"></div>
 
-            <p>備考</p>
-            <input type="text" class="io-tag" name="remarks" th:value="${user.remarks}">
-            <p><input type="submit" class="btn" value="登録"></p>
-        </form>
+                <p><label for="remarks">備考</label></p>
+                <input type="text" class="io-tag" id="remarks" name="remarks" th:value="${user.remarks}">
+                <p><input type="submit" class="btn" value="登録"></p>
+            </form>
+        </div>
     </div>
 </body>
 </html>

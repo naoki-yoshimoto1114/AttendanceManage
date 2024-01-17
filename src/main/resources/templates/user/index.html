@@ -4,20 +4,22 @@
 </head>
 <body onload="showClock()">
     <div th:replace="~{user/common::header}"></div>
-    <div class="contents">
-        <p th:utext="${msg}" class="errorMsg"></p>
+    <div class="wrap-contents">
+        <p th:text="${msg}" class="msg"></p>
         <h2>出退勤登録</h2>
-        <p th:text="${session.name} + 'さんの出勤状態:' + ${status}"></p>
-        <p>現在時刻:<span id="clock-time"></span></p>
-        <form th:action="${action}" name="form" method="GET">
-            <div class="menu-btn">
-                <ul class="menu-list">
-                    <li th:if="${!status.equals('未出勤')}"><input type="button" class="btn home-btn" name="btn1" th:value="${msg1}" onclick="showAlert()"></li>
-                    <li th:if="${status.equals('未出勤')}"><input type="submit" class="btn home-btn" name="btn1" th:value="${msg1}"></li>
-                    <li th:if="${status.equals('勤務中1')}"><input type="button" class="btn home-btn" name="btn2" th:value="${msg2}" formaction="/endWork" onclick="endWorkAlert()"></li>
-                </ul>
-            </div>
-        </form>
+        <div class="contents">
+            <p th:text="${session.name} + 'さんの出勤状態:' + ${status}"></p>
+            <p>現在時刻:<span id="clock-time"></span></p>
+            <form th:action="${action}" name="form" method="GET">
+                <div class="menu-btn">
+                    <ul class="menu-list">
+                        <li th:if="${!status.equals('未出勤')}"><input type="button" class="btn home-btn" name="btn1" th:value="${msg1}" onclick="showAlert()"></li>
+                        <li th:if="${status.equals('未出勤')}"><input type="submit" class="btn home-btn" name="btn1" th:value="${msg1}"></li>
+                        <li th:if="${status.equals('勤務中1')}"><input type="button" class="btn home-btn" name="btn2" th:value="${msg2}" formaction="/endWork" onclick="endWorkAlert()"></li>
+                    </ul>
+                </div>
+            </form>
+        </div>
     </div>
 <script>
     setInterval('showClock()', 1000);

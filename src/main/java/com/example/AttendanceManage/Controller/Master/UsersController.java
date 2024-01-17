@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -53,7 +54,7 @@ public class UsersController {
     }
 
     @PostMapping("master/user/add")
-    private String addUser(Model model, @ModelAttribute("userAddForm") @Validated UserAddForm userAddForm, BindingResult bindingResult)
+    private String addUser(Model model, RedirectAttributes redirectAttributes, @ModelAttribute("userAddForm") @Validated UserAddForm userAddForm, BindingResult bindingResult)
     {
         // バリデーションエラーあり
         if(bindingResult.hasErrors())
@@ -62,6 +63,10 @@ public class UsersController {
         }
         // ユーザ登録
         userService.addUser(userAddForm);
+
+        String msg = "ユーザを新規登録しました";
+        redirectAttributes.addFlashAttribute("msg", msg);
+
         return "redirect:/master/users";
     }
 
@@ -83,7 +88,7 @@ public class UsersController {
     }
 
     @PostMapping("master/user/update")
-    private String updateUser(User user, Model model, @ModelAttribute("userEditForm") @Validated UserEditForm userEditForm, BindingResult bindingResult)
+    private String updateUser(User user, Model model, RedirectAttributes redirectAttributes, @ModelAttribute("userEditForm") @Validated UserEditForm userEditForm, BindingResult bindingResult)
     {
         // バリデーションエラーあり
         if(bindingResult.hasErrors())
@@ -102,13 +107,21 @@ public class UsersController {
 
         // 更新処理
         userService.updateUser(userEditForm, user.getId());
+
+        String msg = "ユーザ情報を編集しました";
+        redirectAttributes.addFlashAttribute("msg", msg);
+
         return "redirect:/master/users";
     }
 
     @PostMapping("master/user/delete")
-    private String delete(@ModelAttribute User user)
+    private String delete(RedirectAttributes redirectAttributes, @ModelAttribute User user)
     {
         userCrudRepository.delete(user);
+
+        String msg = "ユーザを削除しました";
+        redirectAttributes.addFlashAttribute("msg", msg);
+
         return "redirect:/master/users";
     }
 }

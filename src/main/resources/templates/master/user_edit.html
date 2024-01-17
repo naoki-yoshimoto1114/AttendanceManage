@@ -4,50 +4,53 @@
 </head>
 <body>
     <div th:replace="~{master/common::header}"></div>
-    <div class="contents">
+    <div class="wrap-contents">
         <h2>ユーザ編集</h2>
-        <form th:action="@{/master/user/update}" method="POST" th:object="${userEditForm}">
-            <input type="hidden" name="id" th:value="${user.id}">
-            <p><span class="errorMsg">※</span> 名前</p>
-            <input type="text" class="io-tag" name="name" th:value="${user.name}" th:field="*{name}">
-            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="errorMsg"></div>
+        <div class="contents">
+            <form th:action="@{/master/user/update}" method="POST" th:object="${userEditForm}">
+                <input type="hidden" name="id" th:value="${user.id}">
+                <p><label for="name"><span class="msg">※</span> 名前</label></p>
+                <input type="text" class="io-tag" id="name" name="name" th:value="${user.name}" th:field="*{name}">
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="msg"></div>
 
-            <p><span class="errorMsg">※</span> ユーザID</p>
-            <input type="text" class="io-tag" name="userId" th:value="${user.userId}" th:field="*{userId}">
-            <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="errorMsg"></div>
-            <th:block th:if="${userIdErrMsg != null}">
-                <div th:text="${userIdErrMsg}" class="errorMsg"></div>
-            </th:block>
-
-            <p><span class="errorMsg">※</span> パスワード</p>
-            <input type="password" class="io-tag" name="password" th:field="*{password}">
-            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="errorMsg"></div>
-
-            <p>
-                所属
-                <select class="select-box" name="department">
-                    <option value="開発部" th:selected="${user.department == '開発部'}">開発部</option>
-                    <option value="営業部" th:selected="${user.department == '営業部'}">営業部</option>
-                    <option value="人事部" th:selected="${user.department == '人事部'}">人事部</option>
-                </select>
-            </p>
-            <p>
-                権限
-                <select class="select-box" name="role">
-                    <option value="USER" th:selected="${user.role == 'USER'}">一般</option>
-                    <option value="ADMIN" th:selected="${user.role == 'ADMIN'}">管理者</option>
-                </select>
-            </p>
-            <p>
-                <input type="submit" class="btn" value="更新">
-                <th:block th:if="${user.id != session.id}">
-                    <input type="button" onclick="deleteUser()" class="btn" value="削除">
+                <p><label for="userId"><span class="msg">※</span> ユーザID</label></p>
+                <input type="text" class="io-tag" id="userId" name="userId" th:value="${user.userId}" th:field="*{userId}">
+                <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="msg"></div>
+                <th:block th:if="${userIdErrMsg != null}">
+                    <div th:text="${userIdErrMsg}" class="msg"></div>
                 </th:block>
-            </p>
-        </form>
-        <form name="delete_form" th:action="@{/master/user/delete}" method="POST">
-            <input type="hidden" name="id" th:value="${user.id}">
-        </form>
+
+                <p><label for="password"><span class="msg">※</span> パスワード</label></p>
+                <input type="password" class="io-tag" id="password" name="password" th:field="*{password}">
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="msg"></div>
+
+                <p>
+                    <label for="department">所属</label>
+                    <select class="select-box" id="department" name="department">
+                        <option value="開発部" th:selected="${user.department == '開発部'}">開発部</option>
+                        <option value="営業部" th:selected="${user.department == '営業部'}">営業部</option>
+                        <option value="人事部" th:selected="${user.department == '人事部'}">人事部</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="role">権限</label>
+                    <select class="select-box" id="role" name="role">
+                        <option value="USER" th:selected="${user.role == 'USER'}">一般</option>
+                        <option value="ADMIN" th:selected="${user.role == 'ADMIN'}">管理者</option>
+                    </select>
+                </p>
+                <p>
+                    <button onclick="history.back()" class="btn back-btn" type="button">戻る</button>
+                    <input type="submit" class="btn" value="更新">
+                    <th:block th:if="${user.id != session.id}">
+                        <input type="button" onclick="deleteUser()" class="btn delete-btn" value="削除">
+                    </th:block>
+                </p>
+            </form>
+            <form name="delete_form" th:action="@{/master/user/delete}" method="POST">
+                <input type="hidden" name="id" th:value="${user.id}">
+            </form>
+        </div>
     </div>
 <script>
     function deleteUser()

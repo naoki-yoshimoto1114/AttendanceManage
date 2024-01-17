@@ -11,16 +11,20 @@
             <div class="logo">AMA</div>
         </div>
     </header>
-    <div class="contents">
+    <div class="wrap-contents">
         <h2>ログイン</h2>
-        <div class="errorMsg" th:text="${errorMsg}"></div>
-        <form th:action="@{/login}" method="POST">
-            <p>ユーザID</p>
-            <input type="text" name="userId" class="io-tag">
-            <p>パスワード</p>
-            <input type="password" name="password" class="io-tag">
-            <p><input type="submit" class="btn login-btn" value="ログイン"></p>
-        </form>
+        <div class="contents">
+            <div class="msg" th:text="${msg}"></div>
+            <form th:action="@{/login}" method="POST">
+                <div class="login-form">
+                    <p>ユーザID</p>
+                    <input type="text" name="userId" class="io-tag">
+                    <p>パスワード</p>
+                    <input type="password" name="password" class="io-tag">
+                </div>
+                <p><input type="submit" class="btn login-btn" value="ログイン"></p>
+            </form>
+        </div>
     </div>
 </body>
 </html>

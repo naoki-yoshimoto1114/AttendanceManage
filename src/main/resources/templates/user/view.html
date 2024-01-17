@@ -4,34 +4,36 @@
 </head>
 <body onload="showDate()">
     <div th:replace="~{user/common::header}"></div>
-    <div class="contents">
+    <div class="wrap-contents">
         <h2><span id="today"></span>の勤務状況</h2>
-        <table class="table">
-            <tr>
-                <th>氏名</th>
-                <th>勤務開始時間</th>
-                <th>休憩開始時間</th>
-                <th>休憩終了時間</th>
-                <th>勤務終了時間</th>
-                <th>勤務場所</th>
-                <th>所属</th>
-                <th>ステータス</th>
-            </tr>
-            <th:block th:if="${attendances.size() > 0}">
-                <tr th:each="attendance : ${attendances}">
-                    <td th:text="${attendance.name}"></td>
-                    <td th:text="${attendance.begin_time}?: '--:--'"></td>
-                    <td th:text="${attendance.rest_start}?: '--:--'"></td>
-                    <td th:text="${attendance.rest_end}?: '--:--'"></td>
-                    <td th:text="${attendance.end_time}?: '--:--'"></td>
-                    <td th:text="${attendance.place}?: '-'"></td>
-                    <td th:text="${attendance.department}"></td>
-                    <td th:text="${attendance.status}"></td>
+        <div class="contents">
+            <table class="table">
+                <tr>
+                    <th>氏名</th>
+                    <th>勤務開始時間</th>
+                    <th>休憩開始時間</th>
+                    <th>休憩終了時間</th>
+                    <th>勤務終了時間</th>
+                    <th>勤務場所</th>
+                    <th>所属</th>
+                    <th>ステータス</th>
                 </tr>
-            </th:block>
-        </table>
-        <div th:if="${attendances.size() == 0}">
-            <p>本日の勤務データはありません。</p>
+                <th:block th:if="${attendances.size() > 0}">
+                    <tr th:each="attendance : ${attendances}">
+                        <td th:text="${attendance.name}"></td>
+                        <td th:text="${attendance.begin_time}?: '--:--'"></td>
+                        <td th:text="${attendance.rest_start}?: '--:--'"></td>
+                        <td th:text="${attendance.rest_end}?: '--:--'"></td>
+                        <td th:text="${attendance.end_time}?: '--:--'"></td>
+                        <td th:text="${attendance.place}?: '-'"></td>
+                        <td th:text="${attendance.department}"></td>
+                        <td th:text="${attendance.status}"></td>
+                    </tr>
+                </th:block>
+            </table>
+            <div th:if="${attendances.size() == 0}">
+                <p>本日の勤務データはありません。</p>
+            </div>
         </div>
     </div>
 </body>
