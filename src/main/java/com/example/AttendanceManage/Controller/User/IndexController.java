@@ -86,7 +86,7 @@ public class IndexController {
         String sql = "UPDATE attendances SET rest_end = ?::time, status = ? WHERE attendance_id = ?";
 
         try{
-            jdbcTemplate.update(sql, rest_end, "勤務中", attendance_id);
+            jdbcTemplate.update(sql, rest_end, "勤務中2", attendance_id);
             session.setAttribute("status", "勤務中2");
         } catch (Exception e) {
             e.printStackTrace();

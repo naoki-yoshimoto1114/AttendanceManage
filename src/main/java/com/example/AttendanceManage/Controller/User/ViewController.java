@@ -58,10 +58,13 @@ public class ViewController {
 
         try
         {
-            jdbcTemplate.update(sql, user_id, begin_time, null, null, null, place, date, "勤務中");
+            jdbcTemplate.update(sql, user_id, begin_time, null, null, null, place, date, "勤務中1");
             Integer attendance_id = jdbcTemplate.queryForObject(id, Integer.class);
             session.setAttribute("status", "勤務中1");
-            session.setAttribute("attendance_id", attendance_id);
+            String sessionStatus = (String) session.getAttribute("attendance_id");
+            if(sessionStatus.isEmpty()){
+                session.setAttribute("attendance_id", attendance_id);
+            }
         }
         catch (Exception e)
         {
