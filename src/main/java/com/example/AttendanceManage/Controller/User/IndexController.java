@@ -39,7 +39,7 @@ public class IndexController {
         }else if(status.equals("勤務中2")){
             model.addAttribute("msg1", "退勤");
             model.addAttribute("action", "/endWork");
-        }else if(status.equals("未出勤") || status.equals("退勤")){
+        }else if(status.equals("未出勤")){
             model.addAttribute("msg1", "出勤");
             model.addAttribute("msg2", "退勤");
             model.addAttribute("action", "/workplace");
@@ -47,6 +47,8 @@ public class IndexController {
             model.addAttribute("msg1", "休憩終了");
             model.addAttribute("msg2", "退勤");
             model.addAttribute("action", "/endRest");
+        }else if(status.equals("退勤")){
+            model.addAttribute("endMessage", "本日の業務は終了しました。");
         }
         return "user/index";
     }
