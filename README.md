@@ -100,7 +100,9 @@
     <td></td>
   </tr>
   <tr>
-    <td colspan="3">追加機能要件 〜admin権限〜</td>
+    <th>追加機能要件 〜admin権限〜</th>
+    <th>機能作成</th>
+    <th>テスト作成</th>
   </tr>
   <tr>
     <td>ユーザー一覧を表示できる</td>
