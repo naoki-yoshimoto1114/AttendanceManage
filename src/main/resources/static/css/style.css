@@ -50,10 +50,16 @@ p
     box-shadow: 3px 3px 0 0 rgba(0, 128, 0, 0.33);
 }
 
-.logo, .nav-wrapper
+.logo-userId, .nav-wrapper
 {
     display: flex;
     align-items: center;
+}
+
+.userId
+{
+    margin-left: 20px;
+    font-weight: bold;
 }
 
 .nav-wrapper
@@ -343,8 +349,15 @@ a.user-name-link:hover::after
     background: white;
 }
 
-.option-msg
+.option-msg, .endMessage
 {
     color: green;
     font-weight: bold;
+}
+
+.clock
+{
+    font-size: 35px;
+    font-weight: bold;
+    color: green;
 }

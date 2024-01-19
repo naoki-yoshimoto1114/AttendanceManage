@@ -9,7 +9,10 @@
 <body>
     <header class="header" th:fragment="header">
         <div class="nav-wrapper">
-            <div class="logo"><a href="/master/users">AMA</a></div>
+            <div class="logo-userId">
+                <div class="logo"><a href="/">AMA</a></div>
+                <div class="userId" th:text="'ユーザID:' + ${session.userId}"></div>
+            </div>
             <div class="menu">
                 <ul>
                     <li><a href="/master/users">ユーザ管理</a></li>
