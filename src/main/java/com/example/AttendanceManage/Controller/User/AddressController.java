@@ -44,7 +44,7 @@ public class AddressController {
     }
 
     @PostMapping("address/add")
-    private String addAddress(Model model, RedirectAttributes redirectAttributes, @ModelAttribute("addressAddForm") @Validated AddressAddForm addressAddForm, BindingResult bindingResult){
+    private String addAddress(User user, Model model, RedirectAttributes redirectAttributes, @ModelAttribute("addressAddForm") @Validated AddressAddForm addressAddForm, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             return "user/address_add";

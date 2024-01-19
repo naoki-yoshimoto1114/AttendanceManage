@@ -15,12 +15,24 @@
                     <th style="width: 40%;">氏名</th>
                     <th>所属</th>
                     <th>権限</th>
+                    <th>連絡先</th>
                 </tr>
                 <tr th:each="user : ${users}">
+                    <!--ユーザID-->
                     <td th:text="${user.userId}"></td>
+                    <!--名前-->
                     <td><a class="user-name-link" th:href="@{'user/edit/'+${user.id}}" th:text="${user.name}"></a></td>
+                    <!--所属-->
                     <td th:text="${user.department}"></td>
+                    <!--権限-->
                     <td th:text="${user.role == 'USER'} ? '一般' : '管理者'"></td>
+                    <!--連絡先-->
+                    <th:block th:if="${(user.email == null || user.email.isEmpty()) && (user.tel == null || user.tel.isEmpty())}">
+                        <td>登録なし</td>
+                    </th:block>
+                    <th:block th:unless="${(user.email == null || user.email.isEmpty()) && (user.tel == null || user.tel.isEmpty())}">
+                        <td><a class="user-name-link" th:href="@{'user/address/'+${user.id}}">連絡先</a></td>
+                    </th:block>
                 </tr>
             </table>
             <div th:if="${users.size() > 0}">

@@ -1,15 +1,17 @@
 package com.example.AttendanceManage.Form;
 
+import com.example.AttendanceManage.Validator.PhoneNumber;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
 public class AddressAddForm
 {
-    @NotEmpty(message = "メールアドレスは入力必須です。")
+    @Email(message = "有効なメールアドレスを入力してください。")
     private String email;
 
-    @NotEmpty(message = "電話番号は入力必須です。")
+    @PhoneNumber
     private String tel;
 
     private String remarks;

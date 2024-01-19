@@ -7,6 +7,7 @@ import com.example.AttendanceManage.Service.UserService;
 import com.example.AttendanceManage.repositories.UserCrudRepository;
 import com.example.AttendanceManage.repositories.UserRepository;
 import com.example.AttendanceManage.util.AppUtil;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
@@ -34,13 +35,14 @@ public class UsersController {
     private UserService userService;
     @Autowired
     private MessageSource messageSource;
+    @Autowired
+    private HttpSession session;
 
 
     @GetMapping("master/users")
     private String index(@PageableDefault(page = 0, size = 10) Pageable pageable, Model model)
     {
         Page<User> userPage = userCrudRepository.findAllByOrderById(pageable);
-//        model.addAttribute("users", userCrudRepository.findAllByOrderById());
         model.addAttribute("page", userPage);
         model.addAttribute("users", userPage.getContent());
         return "master/index";
@@ -108,6 +110,12 @@ public class UsersController {
         // 更新処理
         userService.updateUser(userEditForm, user.getId());
 
+        // session再生成(自信の情報が変更された場合の対応)
+        session.setAttribute("userId", userEditForm.getUserId());
+        session.setAttribute("name", userEditForm.getName());
+        session.setAttribute("department", userEditForm.getDepartment());
+        session.setAttribute("role", userEditForm.getRole());
+
         String msg = "ユーザ情報を編集しました";
         redirectAttributes.addFlashAttribute("msg", msg);
 
@@ -123,5 +131,13 @@ public class UsersController {
         redirectAttributes.addFlashAttribute("msg", msg);
 
         return "redirect:/master/users";
+    }
+
+    @GetMapping("master/user/address/{id}")
+    private String address(@PathVariable Integer id, Model model)
+    {
+        Optional<User> user = userCrudRepository.findById(id);
+        user.ifPresent(value -> model.addAttribute("user", value));
+        return "master/address";
     }
 }

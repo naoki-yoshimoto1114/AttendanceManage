@@ -45,7 +45,7 @@ p
 
 .contents
 {
-    padding: 20px 0;
+    padding: 20px 40px;
     background-color: #ddffdd;
     box-shadow: 3px 3px 0 0 rgba(0, 128, 0, 0.33);
 }
@@ -190,7 +190,7 @@ ul.page
 {
     margin: 0 auto;
     table-layout: fixed;
-    width: 90%;
+    width: 100%;
     font-size: 20px;
     border: 3px solid green;
     border-radius: 5px;
@@ -325,4 +325,20 @@ a.user-name-link:hover::after
     padding-left: 5px; /* 追加文字とリンク文字の間隔 */
     color: green; /* 追加文字の色 */
     font-size: 0.8em; /* 追加文字のフォントサイズ */
+}
+
+.address
+{
+    background: green;
+    color: white;
+    padding: 20px;
+    margin: 0 50px 20px 50px;
+    font-size: 25px;
+    border-radius: 5px;
+}
+.address.remarks
+{
+    font-size: 20px;
+    color: black;
+    background: white;
 }

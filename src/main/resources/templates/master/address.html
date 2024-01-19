@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://thymeleaf.org">
+<head th:replace="~{master/common::head(title='ユーザ編集')}">
+</head>
+<body>
+<div th:replace="~{master/common::header}"></div>
+<div class="wrap-contents wrap-small-contents">
+  <h2 th:text="${user.name} + 'さんの連絡先'"></h2>
+  <div class="contents">
+
+      <p>メールアドレス</p>
+      <div class="address" th:text="${user.email != null and !user.email.isEmpty() ? user.email : '登録されていません。'}"></div>
+
+      <p>電話番号</p>
+      <div class="address" th:text="${user.tel != null and !user.tel.isEmpty() ? user.tel : '登録されていません。'}"></div>
+
+      <p>備考</p>
+      <div class="address remarks" th:text="${user.remarks != null and !user.remarks.isEmpty() ? user.remarks : '登録されていません。'}"></div>
+
+      <button onclick="history.back()" class="btn back-btn" type="button">戻る</button>
+  </div>
+</div>
+</body>
+</html>
