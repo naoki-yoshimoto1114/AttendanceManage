@@ -342,3 +342,9 @@ a.user-name-link:hover::after
     color: black;
     background: white;
 }
+
+.option-msg
+{
+    color: green;
+    font-weight: bold;
+}
