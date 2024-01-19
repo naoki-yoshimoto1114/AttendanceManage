@@ -62,7 +62,7 @@ public class ViewController {
             Integer attendance_id = jdbcTemplate.queryForObject(id, Integer.class);
             session.setAttribute("status", "勤務中1");
             String sessionStatus = (String) session.getAttribute("attendance_id");
-            if(sessionStatus.isEmpty()){
+            if(sessionStatus == null){
                 session.setAttribute("attendance_id", attendance_id);
             }
         }

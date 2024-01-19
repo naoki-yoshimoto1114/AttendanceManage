@@ -13,9 +13,10 @@
             <form th:action="${action}" name="form" method="GET">
                 <div class="menu-btn">
                     <ul class="menu-list">
-                        <li th:if="${!status.equals('未出勤')}"><input type="button" class="btn home-btn" name="btn1" th:value="${msg1}" onclick="showAlert()"></li>
+                        <li th:if="${!status.equals('未出勤') && !status.equals('退勤')}"><input type="button" class="btn home-btn" name="btn1" th:value="${msg1}" onclick="showAlert()"></li>
                         <li th:if="${status.equals('未出勤')}"><input type="submit" class="btn home-btn" name="btn1" th:value="${msg1}"></li>
                         <li th:if="${status.equals('勤務中1')}"><input type="button" class="btn home-btn" name="btn2" th:value="${msg2}" formaction="/endWork" onclick="endWorkAlert()"></li>
+                        <li th:utext="${endMessage}"></li>
                     </ul>
                 </div>
             </form>
